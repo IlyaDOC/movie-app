@@ -1,0 +1,42 @@
+@import "../../../../assets/styles/variables";
+
+.search {
+  padding: 44px 0 26px 37px;
+  background-color: $bg;
+
+  &__input {
+    width: 889px;
+    height: 65px;
+    position: relative;
+
+    input {
+      width: 100%;
+      height: 100%;
+      padding: 14px 101px;
+      border-radius: 30px;
+      outline: none;
+      border: none;
+      background-color: $bg-secondary;
+      font-size: 25px;
+      font-weight: 600;
+      line-height: 38px;
+      color: $white;
+
+      &::placeholder {
+        color: $gray;
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 38px;
+      }
+    }
+  }
+
+  i.pi-search {
+    position: absolute;
+    font-size: 35px;
+    color: $gray;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 41px;
+  }
+}
