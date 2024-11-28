@@ -2,36 +2,32 @@
   <div class="container">
     <div class="film-page__inner">
       <div class="film-page__image">
-        <img src="assets/static/images/film-page-cover.png" alt="Film Cover">
+        <img src="{{filmData.posterUrlPreview}}" alt="Film Cover">
       </div>
       <div class="film-page__content">
         <div class="film-page__content-main">
           <div class="film-page__title">
             <div class="film-page__name">
-              <span>Top Gun: Maverick</span>
-              <span>Top Gun: Maverick</span>
-              <span>Top Gun: Maverick</span>
+              <span>{{filmData.nameRu}}</span>
+              <span>{{filmData.nameOriginal}}</span>
             </div>
-            <div class="film-page__year">2022</div>
+            <div class="film-page__year">Год: {{filmData.year}}</div>
             <div class="film-page__genres">
-              <div class="genre">Action</div>
-              <div class="genre">Drama</div>
+              <div class="genre" *ngFor="let genre of filmData.genres">{{genre.genre}}</div>
             </div>
           </div>
-          <div class="film-page__description.style-underline">
-            After thirty years, Maverick is still pushing the envelope as a top naval aviator,
-            but must confront ghosts of his past when he leads TOP GUN's elite graduates
-            on a mission that demands the ultimate sacrifice from those chosen to fly it.
+          <div class="film-page__description style-underline">
+            {{filmData.description}}
           </div>
-          <div class="film-page__director.style-underline">
-            <span>Director:</span>
+          <div class="film-page__director style-underline">
+            <span>Режиссер:</span>
             <span>Joseph Kosinski</span>
           </div>
-          <div class="film-page__writers.style-underline">
+          <div class="film-page__writers style-underline">
             <span>Writers:</span>
             <span>Jim Cash, Jack Epps Jr,  Peter Craig</span>
           </div>
-          <div class="film-page__stars.style-underline">
+          <div class="film-page__stars style-underline">
             <span>Stars:</span>
             <span>Tom Cruise, Jennifer Connelly, Miles Teller</span>
           </div>
