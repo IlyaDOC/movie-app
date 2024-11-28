@@ -1,0 +1,9 @@
+.film-page {
+  max-width: 1200px;
+  padding-left: 37px;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+}

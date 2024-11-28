@@ -1,0 +1,11 @@
+<a class="film-card" routerLink="/films" [queryParams]="{id: film.kinopoiskId.toString()}">
+  <div class="film-card__image">
+    <img src="{{film.posterUrl}}" alt="Film poster">
+  </div>
+  <div class="film-card__rating">
+    <div class="rating-star">
+      <img src="assets/static/images/icon_star.svg" alt="Star">
+    </div>
+    <div class="rating-value">{{film.ratingKinopoisk}}</div>
+  </div>
+</a>
