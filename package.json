@@ -7,7 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:movie-app": "node dist/movie-app/server/server.mjs"
+    "serve:ssr:movie-app": "node dist/movie-app/server/server.mjs",
+    "build-gp": "ng add angular-cli-ghpages",
+    "deploy": "ng deploy --base-href=/movie-app/"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +38,7 @@
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
+    "angular-cli-ghpages": "^2.0.3",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
