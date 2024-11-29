@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'SF-Pro-Display';
+  src: url("../static/fonts/SF-Pro-Display-Regular.otf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'SF-Pro-Display';
+  src: url("../static/fonts/SF-Pro-Display-Semibold.otf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'SF-Pro-Display';
+  src: url("../static/fonts/SF-Pro-Display-Bold.otf");
+  font-weight: 600;
+}
+
+
+body {
+  font-family: 'SF-Pro-Display', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
