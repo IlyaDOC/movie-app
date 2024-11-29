@@ -1,12 +1,21 @@
 @import "../../../../assets/styles/variables";
 
 .search {
-  padding: 44px 0 26px 37px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: $bg;
+
+  &__inner {
+    padding: 44px 0 52px 37px;
+  }
 
   &__input {
     width: 889px;
     height: 65px;
     position: relative;
+
 
     input {
       width: 100%;

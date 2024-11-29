@@ -16,20 +16,29 @@
               <div class="genre" *ngFor="let genre of filmData.genres">{{genre.genre}}</div>
             </div>
           </div>
-          <div class="film-page__description style-underline">
+          <div class="film-page__description staff-block">
             {{filmData.description}}
           </div>
-          <div class="film-page__director style-underline">
-            <span>Режиссер:</span>
-            <span>Joseph Kosinski</span>
+          <div class="film-page__directors staff-block">
+            <span>Режиссеры:</span>
+            <div class="director-items">
+              <a class="staff-item" routerLink="/staff" [queryParams]="{id: director.staffId.toString()}"
+                 *ngFor="let director of groupedStaff['DIRECTOR']">{{director.nameRu}}</a>
+            </div>
           </div>
-          <div class="film-page__writers style-underline">
-            <span>Writers:</span>
-            <span>Jim Cash, Jack Epps Jr,  Peter Craig</span>
+          <div class="film-page__writers staff-block">
+            <span>Сценаристы:</span>
+            <div class="writers-items">
+              <a class="staff-item" routerLink="/staff" [queryParams]="{id: writer.staffId.toString()}"
+                 *ngFor="let writer of groupedStaff['WRITER']">{{writer.nameRu}}</a>
+            </div>
           </div>
-          <div class="film-page__stars style-underline">
-            <span>Stars:</span>
-            <span>Tom Cruise, Jennifer Connelly, Miles Teller</span>
+          <div class="film-page__actors staff-block">
+            <span>Актеры:</span>
+            <div class="actors-items">
+              <a class="staff-item" routerLink="/staff" [queryParams]="{id: star.staffId}"
+                 *ngFor="let star of groupedStaff['ACTOR']">{{star.nameRu}}</a>
+            </div>
           </div>
         </div>
         <div class="film-page__content-additional">

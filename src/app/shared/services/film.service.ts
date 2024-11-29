@@ -5,6 +5,7 @@ import {CollectionType} from '../../types/collection.type';
 import {config} from '../../utils/config';
 import {ErrorResponseType} from '../../types/error-response.type';
 import {FilmType} from '../../types/film.type';
+import {StaffType} from '../../types/staff.type';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,14 @@ export class FilmService {
   /** Получаем данные по одному фильму, получая id из query параметров */
   getFilm(id: string): Observable<FilmType | ErrorResponseType>{
     return this.http.get<FilmType | ErrorResponseType>(config.api + 'v2.2/films/' + id);
-  }
+  };
+
+  /** Получаем данных об актерах, режиссерах и т.д */
+  getStaff(filmId: string): Observable<StaffType[] | ErrorResponseType> {
+    return this.http.get<StaffType[] | ErrorResponseType>(config.api + 'v1/staff', {
+      params: {
+        filmId: filmId,
+      }
+    })
+  };
 }
