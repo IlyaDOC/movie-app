@@ -5,7 +5,8 @@ import {CollectionType} from '../../types/collection.type';
 import {config} from '../../utils/config';
 import {ErrorResponseType} from '../../types/error-response.type';
 import {FilmType} from '../../types/film.type';
-import {StaffType} from '../../types/staff.type';
+import {BoxOfficeType} from '../../types/box-office.type';
+import {FactsType} from '../../types/facts.type';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +32,17 @@ export class FilmService {
     return this.http.get<FilmType | ErrorResponseType>(config.api + 'v2.2/films/' + id);
   };
 
-  /** Получаем данных об актерах, режиссерах и т.д */
-  getStaff(filmId: string): Observable<StaffType[] | ErrorResponseType> {
-    return this.http.get<StaffType[] | ErrorResponseType>(config.api + 'v1/staff', {
-      params: {
-        filmId: filmId,
-      }
-    })
-  };
+
+  /** Получаем данные о бюджете с сборах фильма */
+  getBoxOffice(filmId: string): Observable<BoxOfficeType | ErrorResponseType> {
+    return this.http.get<BoxOfficeType | ErrorResponseType>(config.api + 'v2.2/films/' + filmId + '/box_office');
+  }
+
+
+  /** Получаем данные об интересных фактах и ляпах в фильме */
+  getFacts(filmId: string): Observable<FactsType | ErrorResponseType> {
+    return this.http.get<FactsType | ErrorResponseType>(config.api + 'v2.2/films/' + filmId +' /facts');
+  }
+
+
 }

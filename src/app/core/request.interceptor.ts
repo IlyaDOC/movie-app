@@ -12,7 +12,9 @@ export class RequestInterceptor implements HttpInterceptor {
     console.log('Interceptor is working');
     if (accessToken) {
       const cloneReq = req.clone({
-        headers: req.headers.set('X-API-KEY', accessToken)
+        headers: req.headers
+          .set('Accept', 'application/json')
+          .set('X-API-KEY', accessToken)
       });
 
       return next.handle(cloneReq);
