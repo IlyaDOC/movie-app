@@ -25,9 +25,6 @@ export class FilmCardComponent {
         {
           genre: ''
         },
-        {
-          genre: ''
-        }
       ],
       ratingKinopoisk: 0,
       ratingImdb: 0,

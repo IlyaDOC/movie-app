@@ -1,0 +1,113 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.header {
+  margin-top: 10px;
+  &__inner {
+    background-color: $bg-secondary;
+    box-shadow: 0 0 20px 0 black;
+    border-radius: 10px;
+    @include flexColumn;
+    gap: 20px;
+    padding: 20px 10px;
+
+    @include breakpoint(md) {
+      padding: 20px;
+    }
+
+    &-top {
+      @include flexCenterBetween;
+    }
+
+    &-bottom {
+
+    }
+  }
+
+  &__logo {
+    width: 90px;
+    height: auto;
+    @include flexCenterCenter;
+
+    @include breakpoint(lg) {
+      width: 120px;
+    }
+  }
+
+  &__nav {
+    display: grid;
+    position: fixed;
+    top: -100%;
+    width: calc(100% - var(--container) * 2);
+    left: var(--container);
+    background-color: $bg-secondary;
+    box-shadow: 0 0 20px 0 black;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all .3s ease-in-out;
+    z-index: -1;
+
+    &.opened {
+      top: 178px;
+    }
+
+    @include breakpoint(lg) {
+      position: static;
+      z-index: unset;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    ul {
+      display: block;
+
+      @include breakpoint(lg) {
+        display: flex;
+        gap: 30px;
+        margin-left: 20%;
+      }
+
+      li {
+        a {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          height: 86px;
+          width: 100%;
+          color: $gray;
+          font-weight: 600;
+          padding: 15px;
+          border-radius: 5px;
+
+          @include breakpoint(lg) {
+            height: fit-content;
+          }
+
+          &.active {
+
+            @include breakpoint(lg) {
+              background-color: #3DD2CC66;
+              color: $green;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .navToggle {
+    @include flexColumn;
+    gap: 5px;
+    cursor: pointer;
+    i {
+      width: 40px;
+      height: 4px;
+      background-color: $bg;
+      display: block;
+    }
+
+    @include breakpoint(lg) {
+      display: none;
+    }
+  }
+}

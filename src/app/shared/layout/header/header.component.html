@@ -1,0 +1,37 @@
+<div class="header">
+  <div class="container">
+    <div class="header__inner">
+      <div class="header__inner-top">
+        <a routerLink="/home" class="header__logo">
+          <img src="assets/static/images/logo.svg" alt="Logo">
+        </a>
+        <div class="header__nav" [class.opened]="isOpened">
+          <nav>
+            <ul>
+              <li>
+                <a routerLink="/home" routerLinkActive="active">
+                  <i class="pi pi-home"></i>
+                  Главная
+                </a>
+              </li>
+              <li>
+                <a routerLink="/film-collections" routerLinkActive="active">
+                  <i class="pi pi-video"></i>
+                  Фильмы
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="navToggle" (click)="headerAction()">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+      <div class="header__inner-bottom">
+        <app-search></app-search>
+      </div>
+    </div>
+  </div>
+</div>

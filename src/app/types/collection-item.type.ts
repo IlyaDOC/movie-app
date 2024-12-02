@@ -12,9 +12,6 @@ export type CollectionItemType = {
   genres: [
     {
       genre: string
-    },
-    {
-      genre: string
     }
   ],
   ratingKinopoisk: number,

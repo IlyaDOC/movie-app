@@ -5,18 +5,27 @@ import {AppComponent} from './app.component';
 import {SharedModule} from './shared/shared.module';
 import {MainComponent} from './views/main/main.component';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withFetch,
+  withInterceptorsFromDi
+} from '@angular/common/http';
 import {RequestInterceptor} from './core/request.interceptor';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { FilmPageComponent } from './views/film-page/film-page.component';
+import {CarouselModule} from 'ngx-owl-carousel-o';
+import {FilmsModule} from './views/films/films.module';
+import {LayoutComponent} from './shared/layout/layout.component';
+import {HeaderComponent} from './shared/layout/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LayoutComponent,
     MainComponent,
-    FilmPageComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +35,8 @@ import { FilmPageComponent } from './views/film-page/film-page.component';
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatMenuModule,
+    CarouselModule,
+    FilmsModule,
     AppRoutingModule
   ],
   providers: [
@@ -41,6 +52,8 @@ import { FilmPageComponent } from './views/film-page/film-page.component';
       useValue: {duration: 2500}
     }
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

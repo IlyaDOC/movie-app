@@ -43,6 +43,4 @@ export class FilmService {
   getFacts(filmId: string): Observable<FactsType | ErrorResponseType> {
     return this.http.get<FactsType | ErrorResponseType>(config.api + 'v2.2/films/' + filmId +' /facts');
   }
-
-
 }

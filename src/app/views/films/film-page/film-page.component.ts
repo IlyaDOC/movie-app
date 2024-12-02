@@ -1,14 +1,16 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {FilmService} from '../../shared/services/film.service';
+import {FilmService} from '../../../shared/services/film.service';
+import {StaffService} from '../../../shared/services/staff.service';
 import {ActivatedRoute} from '@angular/router';
-import {FilmType} from '../../types/film.type';
-import {ErrorResponseType} from '../../types/error-response.type';
-import {HttpErrorResponse} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {StaffType} from '../../types/staff.type';
-import {StaffService} from '../../shared/services/staff.service';
-import {BoxOfficeType} from '../../types/box-office.type';
-import {BoxOfficeItemType} from '../../types/box-office-item.type';
+import {FilmType} from '../../../types/film.type';
+import {StaffType} from '../../../types/staff.type';
+import {BoxOfficeType} from '../../../types/box-office.type';
+import {BoxOfficeItemType} from '../../../types/box-office-item.type';
+import {OwlOptions} from 'ngx-owl-carousel-o';
+import {ErrorResponseType} from '../../../types/error-response.type';
+import {HttpErrorResponse} from '@angular/common/http';
+import {FactsType} from '../../../types/facts.type';
 
 @Component({
   selector: 'app-film-page',
@@ -34,6 +36,22 @@ export class FilmPageComponent implements OnInit {
   public boxOfficeDataWorld: BoxOfficeItemType | undefined;
   public boxOfficeTotal: number = 0;
   /////////
+
+  ////////Owl Carousel
+  staffCarouselOptions: OwlOptions = {
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    margin: 20,
+    responsive: {
+      0: {
+        items: 4
+      }
+    },
+  }
+  ///////////
 
   constructor() {
     this.filmData = {
@@ -125,7 +143,6 @@ export class FilmPageComponent implements OnInit {
     });
   }
 
-
   /** Функция для обработки ошибочного ответа.
    * Требуется в связи постоянно повторяющимся фрагментом кода в каждом запросе */
   catchErrorInResponse(data: ErrorResponseType) {
@@ -138,6 +155,7 @@ export class FilmPageComponent implements OnInit {
       throw new Error(error);
     }
   }
+
 
   /** Подписываемся на получение данных о фильме. FilmId получем из query параметров */
   getFilmData(filmID: string) {
@@ -174,6 +192,7 @@ export class FilmPageComponent implements OnInit {
     }, {} as { [key: string]: StaffType[] });
   };
 
+
   /** Подписываемся на получение данных об актерах, режиссерах и т.д.
    * FilmId так же получаем из query параметров */
   getStaffData(filmId: string) {
@@ -193,25 +212,29 @@ export class FilmPageComponent implements OnInit {
           }
         }
       })
-  }
+  };
 
+
+  /** Подписываемся на запрос по получению данных о кассовых сборах и бюджете фильма */
   getBoxOfficeData(filmId: string) {
     this.filmService.getBoxOffice(filmId)
       .subscribe({
         next: (data: BoxOfficeType | ErrorResponseType) => {
-            this.catchErrorInResponse(data as ErrorResponseType);
-            this.boxOfficeData = data as BoxOfficeType;
-            if (this.boxOfficeData) {
-              this.boxOfficeDataBudget = this.boxOfficeData.items.find((item: BoxOfficeItemType): boolean => item.type === 'BUDGET');
-              this.boxOfficeDataRus = this.boxOfficeData.items.find((item: BoxOfficeItemType): boolean => item.type === 'RUS');
-              this.boxOfficeDataUSA = this.boxOfficeData.items.find((item: BoxOfficeItemType): boolean => item.type === 'USA');
-              this.boxOfficeDataWorld = this.boxOfficeData.items.find((item: BoxOfficeItemType): boolean => item.type === 'WORLD');
+          this.catchErrorInResponse(data as ErrorResponseType);
+          this.boxOfficeData = data as BoxOfficeType;
+          if (this.boxOfficeData) {
 
-              if (this.boxOfficeDataRus?.amount && this.boxOfficeDataUSA?.amount && this.boxOfficeDataWorld?.amount) {
-                this.boxOfficeTotal = this.boxOfficeDataRus?.amount + this.boxOfficeDataUSA.amount + this.boxOfficeDataWorld?.amount;
-              }
+            // Распределяем полученные данные на бюджет, сборы в России, США и мире
+            this.boxOfficeDataBudget = this.boxOfficeData.items.find((item: BoxOfficeItemType): boolean => item.type === 'BUDGET');
+            this.boxOfficeDataRus = this.boxOfficeData.items.find((item: BoxOfficeItemType): boolean => item.type === 'RUS');
+            this.boxOfficeDataUSA = this.boxOfficeData.items.find((item: BoxOfficeItemType): boolean => item.type === 'USA');
+            this.boxOfficeDataWorld = this.boxOfficeData.items.find((item: BoxOfficeItemType): boolean => item.type === 'WORLD');
+
+            // Сумма общих сборов
+            if (this.boxOfficeDataRus?.amount && this.boxOfficeDataUSA?.amount && this.boxOfficeDataWorld?.amount) {
+              this.boxOfficeTotal = this.boxOfficeDataRus.amount + this.boxOfficeDataUSA.amount + this.boxOfficeDataWorld.amount;
             }
-
+          }
         },
         error: (errorResponse: HttpErrorResponse) => {
           if (errorResponse.error && errorResponse.error.message) {
@@ -221,5 +244,17 @@ export class FilmPageComponent implements OnInit {
           }
         }
       })
+  };
+
+
+  /** Подписываемся на запрос по получению фактов и ляпов */
+  getFactsAndBloopers(filmId: string) {
+    this.filmService.getFacts(filmId)
+      .subscribe({
+        next: (data: FactsType | ErrorResponseType) => {
+          this.catchErrorInResponse(data as ErrorResponseType);
+        }
+      })
   }
+
 }

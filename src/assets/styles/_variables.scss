@@ -4,6 +4,7 @@
   --color-green: #3DD2CC;
   --color-bg: #191919;
   --color-bg-secondary: #212121;
+  --transiton-style: all .3s ease;
 }
 
 $white: var(--color-white);
@@ -11,3 +12,4 @@ $gray: var(--color-gray);
 $green: var(--color-green);
 $bg: var(--color-bg);
 $bg-secondary: var(--color-bg-secondary);
+$transition: var(--transition-style);

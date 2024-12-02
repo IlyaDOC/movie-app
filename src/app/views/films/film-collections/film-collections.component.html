@@ -1,0 +1,17 @@
+<section class="main">
+  <div class="container">
+    <div class="main__inner">
+      <div class="content">
+        <section class="top">
+          <div class="section-title">
+            Топ фильмов
+          </div>
+          <div class="film__items">
+            <app-film-card *ngFor="let film of films" [film]="film"></app-film-card>
+          </div>
+        </section>
+      </div>
+      <div class="filters"></div>
+    </div>
+  </div>
+</section>
