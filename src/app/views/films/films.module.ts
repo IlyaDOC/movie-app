@@ -6,12 +6,14 @@ import {FilmCollectionsComponent} from './film-collections/film-collections.comp
 import {FilmPageComponent} from './film-page/film-page.component';
 import {SharedModule} from '../../shared/shared.module';
 import {CarouselModule} from 'ngx-owl-carousel-o';
+import { FilmCollectionComponent } from './film-collection/film-collection.component';
 
 
 @NgModule({
   declarations: [
     FilmCollectionsComponent,
-    FilmPageComponent
+    FilmPageComponent,
+    FilmCollectionComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,9 @@
 :root {
   --container: 10px;
+
+  @include breakpoint(lg) {
+    --container: 20px;
+  }
 }
 
 

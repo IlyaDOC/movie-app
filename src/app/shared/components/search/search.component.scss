@@ -13,15 +13,20 @@
 
     input {
       width: 100%;
-      border-radius: 30px;
+      border-radius: 10px;
       outline: none;
       background-color: $bg-secondary;
       font-size: 16px;
       font-weight: 600;
       line-height: 38px;
       color: $white;
-      border: 1px solid $bg;
+      border: 2px solid $bg;
       padding: 10px 10px 10px 55px;
+
+
+      &:focus {
+        border: 2px solid $gray;
+      }
 
       &::placeholder {
         color: $gray;
@@ -38,6 +43,6 @@
     color: $gray;
     top: 50%;
     transform: translateY(-50%);
-    left: 10px;
+    left: 20px;
   }
 }

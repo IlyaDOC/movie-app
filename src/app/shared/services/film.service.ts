@@ -1,18 +1,22 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {catchError, map, Observable, throwError} from 'rxjs';
 import {CollectionType} from '../../types/collection.type';
 import {config} from '../../utils/config';
 import {ErrorResponseType} from '../../types/error-response.type';
 import {FilmType} from '../../types/film.type';
 import {BoxOfficeType} from '../../types/box-office.type';
 import {FactsType} from '../../types/facts.type';
+import {CollectionEnum} from '../../enums/collection.enum';
+import {CollectionItemType} from '../../types/collection-item.type';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilmService {
   private http: HttpClient = inject(HttpClient);
+  private _snackBar: MatSnackBar = inject(MatSnackBar);
   constructor() { }
 
 
@@ -43,4 +47,5 @@ export class FilmService {
   getFacts(filmId: string): Observable<FactsType | ErrorResponseType> {
     return this.http.get<FactsType | ErrorResponseType>(config.api + 'v2.2/films/' + filmId +' /facts');
   }
+
 }

@@ -32,19 +32,19 @@
               </ng-template>
             </owl-carousel-o>
           </div>
-          <div class="film-page__writers staff-block">
-            <span>Сценаристы:</span>
-            <owl-carousel-o [options]="staffCarouselOptions">
-              <ng-template carouselSlide *ngFor="let writer of groupedStaff['WRITER']">
-                <a class="staff-item__container" routerLink="/staff" [queryParams]="{id: writer.staffId.toString()}">
-                  <div class="staff-item__image">
-                    <img src="{{writer.posterUrl}}" alt="Writer's photo">
-                  </div>
-                  <div class="staff-item__name">{{ writer.nameRu }}</div>
-                </a>
-              </ng-template>
-            </owl-carousel-o>
-          </div>
+<!--          <div class="film-page__writers staff-block">-->
+<!--            <span>Сценаристы:</span>-->
+<!--            <owl-carousel-o [options]="staffCarouselOptions">-->
+<!--              <ng-template carouselSlide *ngFor="let writer of groupedStaff['WRITER']">-->
+<!--                <a class="staff-item__container" routerLink="/staff" [queryParams]="{id: writer.staffId.toString()}">-->
+<!--                  <div class="staff-item__image">-->
+<!--                    <img src="{{writer.posterUrl}}" alt="Writer's photo">-->
+<!--                  </div>-->
+<!--                  <div class="staff-item__name">{{ writer.nameRu }}</div>-->
+<!--                </a>-->
+<!--              </ng-template>-->
+<!--            </owl-carousel-o>-->
+<!--          </div>-->
           <!--          <div class="film-page__actors staff-block">-->
           <!--            <span>Актеры:</span>-->
           <!--            <owl-carousel-o [options]="staffCarouselOptions">-->
@@ -61,45 +61,45 @@
         </div>
       </div>
     </div>
-    <div class="film-page__content-additional">
-      <div class="additional-content">
-        <div class="additional-content__container">
-          <div class="additional-content__title">Бюджет:</div>
-          <div
-            class="additional-content__details">{{ boxOfficeDataBudget?.symbol }}{{ boxOfficeDataBudget?.amount | number:'1.0-0' }}
-          </div>
-        </div>
-        <div class="additional-content__container">
-          <div class="additional-content__title">Сборы в России:</div>
-          <div
-            class="additional-content__details">{{ boxOfficeDataRus?.symbol }}{{ boxOfficeDataRus?.amount | number:'1.0-0' }}
-          </div>
-        </div>
-        <div class="additional-content__container">
-          <div class="additional-content__title">Сборы в США:</div>
-          <div
-            class="additional-content__details">{{ boxOfficeDataUSA?.symbol }}{{ boxOfficeDataUSA?.amount | number:'1.0-0' }}
-          </div>
-        </div>
-        <div class="additional-content__container">
-          <div class="additional-content__title">Сборы в мире:</div>
-          <div
-            class="additional-content__details">{{ boxOfficeDataWorld?.symbol }}{{ boxOfficeDataWorld?.amount | number:'1.0-0' }}
-          </div>
-        </div>
-        <div class="additional-content__container">
-          <div class="additional-content__title">Общая сумма сборов:</div>
-          <div class="additional-content__details">${{ boxOfficeTotal | number:'1.0-0' }}</div>
-        </div>
-      </div>
-      <div class="film-page__facts">
-        <div class="film-page__facts-title">
-          Знаете ли вы, что...
-        </div>
-        <div class="film-page__facts-items">
-          <div class="fact-item"></div>
-        </div>
-      </div>
-    </div>
+<!--    <div class="film-page__content-additional">-->
+<!--      <div class="additional-content">-->
+<!--        <div class="additional-content__container">-->
+<!--          <div class="additional-content__title">Бюджет:</div>-->
+<!--          <div-->
+<!--            class="additional-content__details">{{ boxOfficeDataBudget?.symbol }}{{ boxOfficeDataBudget?.amount | number:'1.0-0' }}-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="additional-content__container">-->
+<!--          <div class="additional-content__title">Сборы в России:</div>-->
+<!--          <div-->
+<!--            class="additional-content__details">{{ boxOfficeDataRus?.symbol }}{{ boxOfficeDataRus?.amount | number:'1.0-0' }}-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="additional-content__container">-->
+<!--          <div class="additional-content__title">Сборы в США:</div>-->
+<!--          <div-->
+<!--            class="additional-content__details">{{ boxOfficeDataUSA?.symbol }}{{ boxOfficeDataUSA?.amount | number:'1.0-0' }}-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="additional-content__container">-->
+<!--          <div class="additional-content__title">Сборы в мире:</div>-->
+<!--          <div-->
+<!--            class="additional-content__details">{{ boxOfficeDataWorld?.symbol }}{{ boxOfficeDataWorld?.amount | number:'1.0-0' }}-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="additional-content__container">-->
+<!--          <div class="additional-content__title">Общая сумма сборов:</div>-->
+<!--          <div class="additional-content__details">${{ boxOfficeTotal | number:'1.0-0' }}</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="film-page__facts">-->
+<!--        <div class="film-page__facts-title">-->
+<!--          Знаете ли вы, что...-->
+<!--        </div>-->
+<!--        <div class="film-page__facts-items">-->
+<!--          <div class="fact-item"></div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </div>

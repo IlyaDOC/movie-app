@@ -45,9 +45,10 @@ export class FilmPageComponent implements OnInit {
     dots: false,
     navSpeed: 700,
     margin: 20,
+    skip_validateItems: true,
     responsive: {
       0: {
-        items: 4
+        items: 2
       }
     },
   }
