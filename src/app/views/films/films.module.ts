@@ -15,11 +15,11 @@ import { FilmCollectionComponent } from './film-collection/film-collection.compo
     FilmPageComponent,
     FilmCollectionComponent
   ],
-  imports: [
-    CommonModule,
-    FilmsRoutingModule,
-    SharedModule,
-    CarouselModule
-  ]
+    imports: [
+        CommonModule,
+        FilmsRoutingModule,
+        SharedModule,
+        CarouselModule,
+    ]
 })
 export class FilmsModule { }

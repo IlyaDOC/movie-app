@@ -52,7 +52,8 @@ import {HeaderComponent} from './shared/layout/header/header.component';
       useValue: {duration: 2500}
     }
   ],
-  exports: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

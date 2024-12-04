@@ -11,6 +11,7 @@ import {OwlOptions} from 'ngx-owl-carousel-o';
 import {ErrorResponseType} from '../../../types/error-response.type';
 import {HttpErrorResponse} from '@angular/common/http';
 import {FactsType} from '../../../types/facts.type';
+import {FactItemType} from '../../../types/fact-item.type';
 
 @Component({
   selector: 'app-film-page',
@@ -35,6 +36,8 @@ export class FilmPageComponent implements OnInit {
   public boxOfficeDataUSA: BoxOfficeItemType | undefined;
   public boxOfficeDataWorld: BoxOfficeItemType | undefined;
   public boxOfficeTotal: number = 0;
+  public factsAndBloopersData: FactsType = {total: 0, items: []};
+  public groupedFactsAndBloopersData: { [key: string]: FactItemType[] } = {};
   /////////
 
   ////////Owl Carousel
@@ -45,13 +48,34 @@ export class FilmPageComponent implements OnInit {
     dots: false,
     navSpeed: 700,
     margin: 20,
-    skip_validateItems: true,
     responsive: {
       0: {
         items: 2
+      },
+      500: {
+        items: 4,
+        autoWidth: false
       }
     },
   }
+
+  factCarouselOptions: OwlOptions = {
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    margin: 20,
+    responsive: {
+      0: {
+        items: 1
+      },
+      500: {
+        items: 4,
+      }
+    },
+  }
+
   ///////////
 
   constructor() {
@@ -141,6 +165,7 @@ export class FilmPageComponent implements OnInit {
       this.getFilmData(filmIdFromQueryParams);
       this.getStaffData(filmIdFromQueryParams);
       this.getBoxOfficeData(filmIdFromQueryParams);
+      this.getFactsAndBloopers(filmIdFromQueryParams);
     });
   }
 
@@ -254,8 +279,31 @@ export class FilmPageComponent implements OnInit {
       .subscribe({
         next: (data: FactsType | ErrorResponseType) => {
           this.catchErrorInResponse(data as ErrorResponseType);
+
+          this.factsAndBloopersData = data as FactsType;
+          this.groupByFactType();
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          if (errorResponse.error && errorResponse.error.message) {
+            this._snackBar.open(errorResponse.error.message);
+          } else {
+            this._snackBar.open('Ошибка получения данных');
+          }
         }
       })
   }
+
+  /** Группирует факты и ляпы по двум категориям для последующего удобного отображения
+   * в соответствующих блоках */
+  groupByFactType() {
+    this.groupedFactsAndBloopersData = this.factsAndBloopersData.items.reduce((acc, fact) => {
+      if (!acc[fact.type]) {
+        acc[fact.type] = [];
+      }
+      acc[fact.type].push(fact);
+
+      return acc;
+    }, {} as { [key: string]: FactItemType[] });
+  };
 
 }

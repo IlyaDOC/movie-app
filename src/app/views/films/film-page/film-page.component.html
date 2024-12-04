@@ -32,32 +32,33 @@
               </ng-template>
             </owl-carousel-o>
           </div>
-<!--          <div class="film-page__writers staff-block">-->
-<!--            <span>Сценаристы:</span>-->
-<!--            <owl-carousel-o [options]="staffCarouselOptions">-->
-<!--              <ng-template carouselSlide *ngFor="let writer of groupedStaff['WRITER']">-->
-<!--                <a class="staff-item__container" routerLink="/staff" [queryParams]="{id: writer.staffId.toString()}">-->
-<!--                  <div class="staff-item__image">-->
-<!--                    <img src="{{writer.posterUrl}}" alt="Writer's photo">-->
-<!--                  </div>-->
-<!--                  <div class="staff-item__name">{{ writer.nameRu }}</div>-->
-<!--                </a>-->
-<!--              </ng-template>-->
-<!--            </owl-carousel-o>-->
-<!--          </div>-->
-          <!--          <div class="film-page__actors staff-block">-->
-          <!--            <span>Актеры:</span>-->
-          <!--            <owl-carousel-o [options]="staffCarouselOptions">-->
-          <!--              <ng-template carouselSlide *ngFor="let actor of groupedStaff['ACTOR']">-->
-          <!--                <a class="staff-item__container" routerLink="/staff" [queryParams]="{id: actor.staffId.toString()}">-->
-          <!--                  <div class="staff-item__image">-->
-          <!--                    <img src="{{actor.posterUrl}}" alt="Actor's photo">-->
-          <!--                  </div>-->
-          <!--                  <div class="staff-item__name">{{ actor.nameRu }}</div>-->
-          <!--                </a>-->
-          <!--              </ng-template>-->
-          <!--            </owl-carousel-o>-->
-          <!--          </div>-->
+          <div class="film-page__writers staff-block">
+            <span>Сценаристы:</span>
+            <owl-carousel-o [options]="staffCarouselOptions">
+              <ng-template carouselSlide *ngFor="let writer of groupedStaff['WRITER']">
+                <a class="staff-item__container" routerLink="/staff" [queryParams]="{id: writer.staffId.toString()}">
+                  <div class="staff-item__image">
+                    <img src="{{writer.posterUrl}}" alt="Writer's photo">
+                  </div>
+                  <div class="staff-item__name">{{ writer.nameRu }}</div>
+                </a>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+          <div class="film-page__actors staff-block">
+            <span>Актеры:</span>
+            <owl-carousel-o [options]="staffCarouselOptions">
+              <ng-template carouselSlide *ngFor="let actor of groupedStaff['ACTOR']">
+                <a class="staff-item__container" routerLink="/staff" [queryParams]="{id: actor.staffId.toString()}">
+                  <div class="staff-item__image">
+                    <img src="{{actor.posterUrl}}" alt="Actor's photo">
+                  </div>
+                  <div class="staff-item__name">{{ actor.nameRu }}</div>
+                  <span class="staff-item__role">{{actor.description}}</span>
+                </a>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
         </div>
       </div>
     </div>
@@ -97,7 +98,13 @@
 <!--          Знаете ли вы, что...-->
 <!--        </div>-->
 <!--        <div class="film-page__facts-items">-->
-<!--          <div class="fact-item"></div>-->
+<!--          <owl-carousel-o [options]="factCarouselOptions">-->
+<!--            <ng-template carouselSlide *ngFor="let fact of groupedFactsAndBloopersData['FACT']">-->
+<!--              <div class="fact-item">-->
+<!--                <p>{{ fact.text | removeHtml }}</p>-->
+<!--              </div>-->
+<!--            </ng-template>-->
+<!--          </owl-carousel-o>-->
 <!--        </div>-->
 <!--      </div>-->
 <!--    </div>-->
