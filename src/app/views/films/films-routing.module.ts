@@ -5,9 +5,9 @@ import {FilmPageComponent} from './film-page/film-page.component';
 import {FilmCollectionComponent} from './film-collection/film-collection.component';
 
 const routes: Routes = [
-  {path: '', component: FilmCollectionsComponent},
-  {path: '', component: FilmPageComponent},
-  {path: '', component: FilmCollectionComponent},
+  {path: 'film-collections', component: FilmCollectionsComponent},
+  {path: 'film', component: FilmPageComponent},
+  {path: 'film-collections/:collection', component: FilmCollectionComponent},
 ];
 
 @NgModule({

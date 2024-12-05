@@ -38,6 +38,7 @@ export class FilmPageComponent implements OnInit {
   public boxOfficeTotal: number = 0;
   public factsAndBloopersData: FactsType = {total: 0, items: []};
   public groupedFactsAndBloopersData: { [key: string]: FactItemType[] } = {};
+  public isSpoiler: boolean = true;
   /////////
 
   ////////Owl Carousel
@@ -54,8 +55,12 @@ export class FilmPageComponent implements OnInit {
       },
       500: {
         items: 4,
-        autoWidth: false
+      },
+
+      800: {
+        items: 6,
       }
+
     },
   }
 
@@ -305,5 +310,13 @@ export class FilmPageComponent implements OnInit {
       return acc;
     }, {} as { [key: string]: FactItemType[] });
   };
+
+
+  /** Удаляем класс spoiler у fact-item по клику*/
+  removeSpoilerWrapper(fact: any):void {
+    if (fact.spoiler) {
+      fact.spoiler = false;
+    }
+  }
 
 }

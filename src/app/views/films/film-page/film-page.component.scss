@@ -1,7 +1,7 @@
 @import "../../../../assets/styles/variables";
 @import "../../../../assets/styles/mixins";
 
-.film-page {
+.film {
   padding-top: var(--container);
 
   &__inner {
@@ -43,13 +43,13 @@
     display: grid;
     gap: 26px;
 
-    .film-page__title {
+    .film__title {
       display: flex;
       flex-direction: column;
       row-gap: 20px;
       margin-bottom: 30px;
 
-      .film-page__name {
+      .film__name {
         font-size: 18px;
         display: grid;
         gap: 20px;
@@ -73,7 +73,7 @@
         }
       }
 
-      .film-page__year {
+      .film__year {
         font-size: 18px;
         position: relative;
         margin-right: 50px;
@@ -83,7 +83,7 @@
         width: fit-content;
       }
 
-      .film-page__genres {
+      .film__genres {
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
@@ -104,7 +104,7 @@
       }
     }
 
-    .film-page__description {
+    .film__description {
       font-size: 16px;
       font-weight: 400;
       line-height: 30px;
@@ -171,15 +171,12 @@
 }
 
 
-.film-page__content-additional {
-}
-
-.additional-content {
+.film-budget {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   background-color: $bg-secondary;
   border-radius: 5px;
 
@@ -189,12 +186,12 @@
   }
 }
 
-.film-page__facts {
+.film__facts {
   display: grid;
-  gap: 16px;
+  gap: 10px;
 
   &-title {
-    margin-bottom: 16px;
+    font-size: 20px;
   }
 
   &-items {
@@ -206,5 +203,51 @@
     border-radius: 5px;
     padding: 10px;
     height: fit-content;
+    position: relative;
+    overflow: hidden;
+    min-height: 120px;
+
+    &__spoiler {
+      display: none;
+    }
+
+    &.spoiler {
+      cursor: pointer;
+      position: relative;
+
+      .fact-item__spoiler {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(18, 18, 18);
+
+        .spoiler__content {
+          width: 100%;
+          height: 100%;
+          @include flexColumn;
+          align-items: center;
+          justify-content: center;
+          gap: 15px;
+
+          .spoiler__icon {
+            width: 40px;
+            height: 40px;
+          }
+
+          .spoiler__text {
+            text-align: center;
+            font-weight: 400;
+            font-size: 14px;
+            display: grid;
+            gap: 10px;
+          }
+        }
+
+
+      }
+    }
   }
 }

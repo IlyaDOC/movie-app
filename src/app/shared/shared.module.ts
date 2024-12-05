@@ -7,6 +7,8 @@ import { RemoveHtmlPipe } from './pipes/remove-html.pipe';
 
 
 
+
+
 @NgModule({
   declarations: [
     SearchComponent,

@@ -1,25 +1,25 @@
-<div class="film-page">
+<div class="film">
   <div class="container">
-    <div class="film-page__inner">
-      <div class="film-page__image">
+    <div class="film__inner">
+      <div class="film__image">
         <img src="{{filmData.posterUrlPreview}}" alt="Film Cover">
       </div>
-      <div class="film-page__content">
-        <div class="film-page__content-main">
-          <div class="film-page__title">
-            <div class="film-page__name">
+      <div class="film__content">
+        <div class="film__content-main">
+          <div class="film__title">
+            <div class="film__name">
               <span>{{ filmData.nameRu }}</span>
               <span>{{ filmData.nameOriginal }}</span>
             </div>
-            <div class="film-page__year">Год: {{ filmData.year }}</div>
-            <div class="film-page__genres">
+            <div class="film__year">Год: {{ filmData.year }}</div>
+            <div class="film__genres">
               <div class="genre" *ngFor="let genre of filmData.genres">{{ genre.genre }}</div>
             </div>
           </div>
-          <div class="film-page__description">
+          <div class="film__description">
             {{ filmData.description }}
           </div>
-          <div class="film-page__directors staff-block">
+          <div class="film__directors staff-block">
             <span>Режиссеры:</span>
             <owl-carousel-o [options]="staffCarouselOptions">
               <ng-template carouselSlide *ngFor="let director of groupedStaff['DIRECTOR']">
@@ -32,7 +32,7 @@
               </ng-template>
             </owl-carousel-o>
           </div>
-          <div class="film-page__writers staff-block">
+          <div class="film__writers staff-block">
             <span>Сценаристы:</span>
             <owl-carousel-o [options]="staffCarouselOptions">
               <ng-template carouselSlide *ngFor="let writer of groupedStaff['WRITER']">
@@ -45,7 +45,7 @@
               </ng-template>
             </owl-carousel-o>
           </div>
-          <div class="film-page__actors staff-block">
+          <div class="film__actors staff-block">
             <span>Актеры:</span>
             <owl-carousel-o [options]="staffCarouselOptions">
               <ng-template carouselSlide *ngFor="let actor of groupedStaff['ACTOR']">
@@ -62,51 +62,62 @@
         </div>
       </div>
     </div>
-<!--    <div class="film-page__content-additional">-->
-<!--      <div class="additional-content">-->
-<!--        <div class="additional-content__container">-->
-<!--          <div class="additional-content__title">Бюджет:</div>-->
-<!--          <div-->
-<!--            class="additional-content__details">{{ boxOfficeDataBudget?.symbol }}{{ boxOfficeDataBudget?.amount | number:'1.0-0' }}-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="additional-content__container">-->
-<!--          <div class="additional-content__title">Сборы в России:</div>-->
-<!--          <div-->
-<!--            class="additional-content__details">{{ boxOfficeDataRus?.symbol }}{{ boxOfficeDataRus?.amount | number:'1.0-0' }}-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="additional-content__container">-->
-<!--          <div class="additional-content__title">Сборы в США:</div>-->
-<!--          <div-->
-<!--            class="additional-content__details">{{ boxOfficeDataUSA?.symbol }}{{ boxOfficeDataUSA?.amount | number:'1.0-0' }}-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="additional-content__container">-->
-<!--          <div class="additional-content__title">Сборы в мире:</div>-->
-<!--          <div-->
-<!--            class="additional-content__details">{{ boxOfficeDataWorld?.symbol }}{{ boxOfficeDataWorld?.amount | number:'1.0-0' }}-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="additional-content__container">-->
-<!--          <div class="additional-content__title">Общая сумма сборов:</div>-->
-<!--          <div class="additional-content__details">${{ boxOfficeTotal | number:'1.0-0' }}</div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="film-page__facts">-->
-<!--        <div class="film-page__facts-title">-->
-<!--          Знаете ли вы, что...-->
-<!--        </div>-->
-<!--        <div class="film-page__facts-items">-->
-<!--          <owl-carousel-o [options]="factCarouselOptions">-->
-<!--            <ng-template carouselSlide *ngFor="let fact of groupedFactsAndBloopersData['FACT']">-->
-<!--              <div class="fact-item">-->
-<!--                <p>{{ fact.text | removeHtml }}</p>-->
-<!--              </div>-->
-<!--            </ng-template>-->
-<!--          </owl-carousel-o>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="film--content__additional">
+      <div class="film-budget">
+        <div class="film-budget__container">
+          <div class="film-budget__title">Бюджет:</div>
+          <div
+            class="film-budget__details">{{ boxOfficeDataBudget?.symbol }}{{ boxOfficeDataBudget?.amount | number:'1.0-0' }}
+          </div>
+        </div>
+        <div class="film-budget__container">
+          <div class="film-budget__title">Сборы в России:</div>
+          <div
+            class="film-budget__details">{{ boxOfficeDataRus?.symbol }}{{ boxOfficeDataRus?.amount | number:'1.0-0' }}
+          </div>
+        </div>
+        <div class="film-budget__container">
+          <div class="film-budget__title">Сборы в США:</div>
+          <div
+            class="film-budget__details">{{ boxOfficeDataUSA?.symbol }}{{ boxOfficeDataUSA?.amount | number:'1.0-0' }}
+          </div>
+        </div>
+        <div class="film-budget__container">
+          <div class="film-budget__title">Сборы в мире:</div>
+          <div
+            class="film-budget__details">{{ boxOfficeDataWorld?.symbol }}{{ boxOfficeDataWorld?.amount | number:'1.0-0' }}
+          </div>
+        </div>
+        <div class="film-budget__container">
+          <div class="film-budget__title">Общая сумма сборов:</div>
+          <div class="film-budget__details">${{ boxOfficeTotal | number:'1.0-0' }}</div>
+        </div>
+      </div>
+      <div class="film__facts">
+        <div class="film__facts-title">
+          Знаете ли вы, что...
+        </div>
+        <div class="film__facts-items">
+          <owl-carousel-o [options]="factCarouselOptions">
+            <ng-template carouselSlide *ngFor="let fact of groupedFactsAndBloopersData['FACT']">
+              <div class="fact-item" [class.spoiler]="fact.spoiler" (click)="removeSpoilerWrapper(fact)">
+                <p>{{ fact.text | removeHtml }}</p>
+                <div class="fact-item__spoiler">
+                  <div class="spoiler__content">
+                    <div class="spoiler__icon">
+                      <img src="assets/static/images/icon_eye-off.svg" alt="Eye off">
+                    </div>
+                    <div class="spoiler__text">
+                      <p>Тут есть спойлеры!</p>
+                      <p>Нажмите, чтобы посмотреть</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </owl-carousel-o>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

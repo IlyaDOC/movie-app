@@ -17,15 +17,13 @@ import {MatMenuModule} from '@angular/material/menu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {FilmsModule} from './views/films/films.module';
-import {LayoutComponent} from './shared/layout/layout.component';
 import {HeaderComponent} from './shared/layout/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent,
     MainComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

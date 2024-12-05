@@ -17,6 +17,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    box-shadow: 0 0 20px 0 black;
 
     @include breakpoint(md) {
       padding: 20px;
@@ -74,6 +75,7 @@
       padding: 0;
       visibility: visible;
       overflow: unset;
+      max-height: unset;
     }
 
     ul {
