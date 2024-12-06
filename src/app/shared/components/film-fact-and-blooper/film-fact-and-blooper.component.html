@@ -1,0 +1,29 @@
+<div class="film__facts">
+  <div class="film__facts-title">
+    {{title}}
+    <div class="carousel-arrows">
+      <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCar.prev()"></i>
+      <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCar.next()"></i>
+    </div>
+  </div>
+  <div class="film__facts-items">
+    <owl-carousel-o [options]="factCarouselOptions" #OwlCar>
+      <ng-template carouselSlide *ngFor="let item of facts[typeOf]">
+        <div class="fact-item" [class.spoiler]="item.spoiler" (click)="removeSpoilerWrapper(item)">
+          <p>{{ item.text | removeHtml }}</p>
+          <div class="fact-item__spoiler">
+            <div class="spoiler__content">
+              <div class="spoiler__icon">
+                <i class="pi pi-eye-slash" style="font-size: 30px"></i>
+              </div>
+              <div class="spoiler__text">
+                <p>Тут есть спойлеры!</p>
+                <p>Нажмите, чтобы посмотреть</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+</div>

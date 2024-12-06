@@ -54,7 +54,7 @@
                     <img src="{{actor.posterUrl}}" alt="Actor's photo">
                   </div>
                   <div class="staff-item__name">{{ actor.nameRu }}</div>
-                  <span class="staff-item__role">{{actor.description}}</span>
+                  <span class="staff-item__role">{{ actor.description }}</span>
                 </a>
               </ng-template>
             </owl-carousel-o>
@@ -93,31 +93,8 @@
           <div class="film-budget__details">${{ boxOfficeTotal | number:'1.0-0' }}</div>
         </div>
       </div>
-      <div class="film__facts">
-        <div class="film__facts-title">
-          Знаете ли вы, что...
-        </div>
-        <div class="film__facts-items">
-          <owl-carousel-o [options]="factCarouselOptions">
-            <ng-template carouselSlide *ngFor="let fact of groupedFactsAndBloopersData['FACT']">
-              <div class="fact-item" [class.spoiler]="fact.spoiler" (click)="removeSpoilerWrapper(fact)">
-                <p>{{ fact.text | removeHtml }}</p>
-                <div class="fact-item__spoiler">
-                  <div class="spoiler__content">
-                    <div class="spoiler__icon">
-                      <img src="assets/static/images/icon_eye-off.svg" alt="Eye off">
-                    </div>
-                    <div class="spoiler__text">
-                      <p>Тут есть спойлеры!</p>
-                      <p>Нажмите, чтобы посмотреть</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </owl-carousel-o>
-        </div>
-      </div>
+      <app-film-fact-and-blooper [facts]="groupedFactsAndBloopersData" [title]="factTitle" [typeOf]="factsType"></app-film-fact-and-blooper>
+      <app-film-fact-and-blooper [facts]="groupedFactsAndBloopersData" [title]="bloopersTitle" [typeOf]="bloopersType"></app-film-fact-and-blooper>
     </div>
   </div>
 </div>

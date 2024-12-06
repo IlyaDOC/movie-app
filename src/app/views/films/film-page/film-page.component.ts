@@ -4,7 +4,7 @@ import {StaffService} from '../../../shared/services/staff.service';
 import {ActivatedRoute} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FilmType} from '../../../types/film.type';
-import {StaffType} from '../../../types/staff.type';
+import {FilmStaffType} from '../../../types/film-staff.type';
 import {BoxOfficeType} from '../../../types/box-office.type';
 import {BoxOfficeItemType} from '../../../types/box-office-item.type';
 import {OwlOptions} from 'ngx-owl-carousel-o';
@@ -28,8 +28,8 @@ export class FilmPageComponent implements OnInit {
 
   ///////// Переменные класса
   public filmData: FilmType;
-  public staffData: StaffType[];
-  public groupedStaff: { [key: string]: StaffType[] } = {};
+  public staffData: FilmStaffType[];
+  public groupedStaff: { [key: string]: FilmStaffType[] } = {};
   public boxOfficeData: BoxOfficeType;
   public boxOfficeDataBudget: BoxOfficeItemType | undefined;
   public boxOfficeDataRus: BoxOfficeItemType | undefined;
@@ -39,6 +39,10 @@ export class FilmPageComponent implements OnInit {
   public factsAndBloopersData: FactsType = {total: 0, items: []};
   public groupedFactsAndBloopersData: { [key: string]: FactItemType[] } = {};
   public isSpoiler: boolean = true;
+  public factTitle: string = 'Знаете ли вы что...';
+  public bloopersTitle: string = 'Киноляпы';
+  public factsType: string = 'FACT';
+  public bloopersType: string = 'BLOOPER';
   /////////
 
   ////////Owl Carousel
@@ -161,6 +165,7 @@ export class FilmPageComponent implements OnInit {
           symbol: ''
         }]
     };
+
   }
 
   ngOnInit() {
@@ -220,19 +225,19 @@ export class FilmPageComponent implements OnInit {
       }
 
       return acc;
-    }, {} as { [key: string]: StaffType[] });
+    }, {} as { [key: string]: FilmStaffType[] });
   };
 
 
   /** Подписываемся на получение данных об актерах, режиссерах и т.д.
    * FilmId так же получаем из query параметров */
   getStaffData(filmId: string) {
-    this.staffService.getStaff(filmId)
+    this.staffService.getFilmStaff(filmId)
       .subscribe({
-        next: (data: StaffType[] | ErrorResponseType) => {
+        next: (data: FilmStaffType[] | ErrorResponseType) => {
           this.catchErrorInResponse(data as ErrorResponseType);
 
-          this.staffData = data as StaffType[];
+          this.staffData = data as FilmStaffType[];
           this.groupByProfession();
         },
         error: (errorResponse: HttpErrorResponse) => {
@@ -312,11 +317,5 @@ export class FilmPageComponent implements OnInit {
   };
 
 
-  /** Удаляем класс spoiler у fact-item по клику*/
-  removeSpoilerWrapper(fact: any):void {
-    if (fact.spoiler) {
-      fact.spoiler = false;
-    }
-  }
 
 }

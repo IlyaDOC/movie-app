@@ -1,29 +1,23 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MainComponent} from './views/main/main.component';
-import {FilmCollectionsComponent} from './views/films/film-collections/film-collections.component';
-import {FilmPageComponent} from './views/films/film-page/film-page.component';
-import {FilmCollectionComponent} from './views/films/film-collection/film-collection.component';
+import {LayoutComponent} from './shared/layout/layout.component';
 
 const routes: Routes = [
 
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: MainComponent},
-  {
-    path: '',
-    component: FilmCollectionsComponent,
-    loadChildren: () => import('./views/films/films.module').then(m => m.FilmsModule)
-  },
-  {
-    path: '',
-    component: FilmCollectionComponent,
-    loadChildren: () => import('./views/films/films.module').then(m => m.FilmsModule)
-  },
-  {
-    path: '',
-    component: FilmPageComponent,
-    loadChildren: () => import('./views/films/films.module').then(m => m.FilmsModule)
-  },
+  {path: '', component: LayoutComponent,
+  children: [
+    {path: '', redirectTo: 'home', pathMatch: 'full'},
+    {path: 'home', component: MainComponent},
+    {
+      path: '',
+      loadChildren: () => import('./views/films/films.module').then(m => m.FilmsModule)
+    },
+    {
+      path: '',
+      loadChildren: () =>import('./views/staff/staff.module').then(m => m.StaffModule)
+    }
+  ]},
 ];
 
 

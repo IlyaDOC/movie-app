@@ -18,6 +18,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {FilmsModule} from './views/films/films.module';
 import {HeaderComponent} from './shared/layout/header/header.component';
+import {StaffModule} from './views/staff/staff.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {HeaderComponent} from './shared/layout/header/header.component';
     MatMenuModule,
     CarouselModule,
     FilmsModule,
+    StaffModule,
     AppRoutingModule
   ],
   providers: [

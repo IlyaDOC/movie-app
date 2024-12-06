@@ -4,6 +4,7 @@
 .film {
   padding-top: var(--container);
 
+
   &__inner {
     display: grid;
     gap: 30px;
@@ -17,13 +18,15 @@
     width: 100%;
     height: auto;
     flex-shrink: 0;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
     isolation: isolate;
     position: relative;
 
     @include breakpoint(md) {
       height: min-content;
+
+      border-radius: 20px;
     }
 
     //&:after {
@@ -186,68 +189,4 @@
   }
 }
 
-.film__facts {
-  display: grid;
-  gap: 10px;
 
-  &-title {
-    font-size: 20px;
-  }
-
-  &-items {
-    max-width: calc(100vw - var(--container) * 2);
-  }
-
-  .fact-item {
-    background-color: $bg-secondary;
-    border-radius: 5px;
-    padding: 10px;
-    height: fit-content;
-    position: relative;
-    overflow: hidden;
-    min-height: 120px;
-
-    &__spoiler {
-      display: none;
-    }
-
-    &.spoiler {
-      cursor: pointer;
-      position: relative;
-
-      .fact-item__spoiler {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgb(18, 18, 18);
-
-        .spoiler__content {
-          width: 100%;
-          height: 100%;
-          @include flexColumn;
-          align-items: center;
-          justify-content: center;
-          gap: 15px;
-
-          .spoiler__icon {
-            width: 40px;
-            height: 40px;
-          }
-
-          .spoiler__text {
-            text-align: center;
-            font-weight: 400;
-            font-size: 14px;
-            display: grid;
-            gap: 10px;
-          }
-        }
-
-
-      }
-    }
-  }
-}
