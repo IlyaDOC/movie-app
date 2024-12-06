@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 * {
   margin: 0;
@@ -9,6 +10,7 @@
 
 a {
   text-decoration: none;
+  color: $white;
 }
 
 li {
@@ -26,6 +28,23 @@ img, svg {
   font-size: 25px;
   font-weight: 600;
   margin-bottom: 27px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  p:first-letter {
+    text-transform: uppercase;
+  }
+
+  a {
+    font-size: 14px;
+    color: $white;
+    text-decoration: underline;
+
+    @include breakpoint(lg) {
+      font-size: 16px;
+    }
+  }
 }
 
 body {

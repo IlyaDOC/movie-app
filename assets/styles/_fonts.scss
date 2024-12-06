@@ -1,3 +1,5 @@
+@import "variables";
+
 @font-face {
   font-family: 'SF-Pro-Display';
   src: url("../static/fonts/SF-Pro-Display-Regular.otf");
@@ -19,4 +21,5 @@ body {
   font-family: 'SF-Pro-Display', sans-serif;
   font-size: 16px;
   font-weight: 500;
+  color: $white;
 }
