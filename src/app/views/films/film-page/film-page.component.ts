@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FilmService} from '../../../shared/services/film.service';
 import {StaffService} from '../../../shared/services/staff.service';
 import {ActivatedRoute} from '@angular/router';
@@ -12,13 +12,14 @@ import {ErrorResponseType} from '../../../types/error-response.type';
 import {HttpErrorResponse} from '@angular/common/http';
 import {FactsType} from '../../../types/facts.type';
 import {FactItemType} from '../../../types/fact-item.type';
+import {Subject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-film-page',
   templateUrl: './film-page.component.html',
   styleUrl: './film-page.component.scss'
 })
-export class FilmPageComponent implements OnInit {
+export class FilmPageComponent implements OnInit, OnDestroy {
   ///////// Зависимости
   private filmService: FilmService = inject(FilmService);
   private staffService: StaffService = inject(StaffService);
@@ -40,9 +41,10 @@ export class FilmPageComponent implements OnInit {
   public groupedFactsAndBloopersData: { [key: string]: FactItemType[] } = {};
   public isSpoiler: boolean = true;
   public factTitle: string = 'Знаете ли вы что...';
-  public bloopersTitle: string = 'Киноляпы';
+  public bloopersTitle: string = 'Ошибки в фильме';
   public factsType: string = 'FACT';
   public bloopersType: string = 'BLOOPER';
+  private destroy$: Subject<void> = new Subject();
   /////////
 
   ////////Owl Carousel
@@ -169,14 +171,21 @@ export class FilmPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe(params => {
-      const filmIdFromQueryParams = params['id'];
+    this.activatedRoute.params
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+      const filmIdFromParams = params['filmId'];
 
-      this.getFilmData(filmIdFromQueryParams);
-      this.getStaffData(filmIdFromQueryParams);
-      this.getBoxOfficeData(filmIdFromQueryParams);
-      this.getFactsAndBloopers(filmIdFromQueryParams);
+      this.getFilmData(filmIdFromParams);
+      this.getStaffData(filmIdFromParams);
+      this.getBoxOfficeData(filmIdFromParams);
+      this.getFactsAndBloopers(filmIdFromParams);
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /** Функция для обработки ошибочного ответа.
@@ -196,6 +205,7 @@ export class FilmPageComponent implements OnInit {
   /** Подписываемся на получение данных о фильме. FilmId получем из query параметров */
   getFilmData(filmID: string) {
     this.filmService.getFilm(filmID)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data: FilmType | ErrorResponseType) => {
           this.catchErrorInResponse(data as ErrorResponseType);
@@ -233,6 +243,7 @@ export class FilmPageComponent implements OnInit {
    * FilmId так же получаем из query параметров */
   getStaffData(filmId: string) {
     this.staffService.getFilmStaff(filmId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data: FilmStaffType[] | ErrorResponseType) => {
           this.catchErrorInResponse(data as ErrorResponseType);
@@ -254,6 +265,7 @@ export class FilmPageComponent implements OnInit {
   /** Подписываемся на запрос по получению данных о кассовых сборах и бюджете фильма */
   getBoxOfficeData(filmId: string) {
     this.filmService.getBoxOffice(filmId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data: BoxOfficeType | ErrorResponseType) => {
           this.catchErrorInResponse(data as ErrorResponseType);
@@ -286,6 +298,7 @@ export class FilmPageComponent implements OnInit {
   /** Подписываемся на запрос по получению фактов и ляпов */
   getFactsAndBloopers(filmId: string) {
     this.filmService.getFacts(filmId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data: FactsType | ErrorResponseType) => {
           this.catchErrorInResponse(data as ErrorResponseType);
@@ -315,7 +328,4 @@ export class FilmPageComponent implements OnInit {
       return acc;
     }, {} as { [key: string]: FactItemType[] });
   };
-
-
-
 }

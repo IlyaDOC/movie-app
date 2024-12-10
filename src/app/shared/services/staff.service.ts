@@ -23,8 +23,8 @@ export class StaffService {
   };
 
   /** Получаем всю информацию об актере */
-  // getStaffInfo(staffId: string): Observable<StaffType | ErrorResponseType> {
-  //   return this.http.get<StaffType | ErrorResponseType>(config.api + 'v1/staff/' + staffId)
-  // };
+  getStaffInfo(staffId: string): Observable<StaffType | ErrorResponseType> {
+    return this.http.get<StaffType | ErrorResponseType>(config.api + 'v1/staff/' + staffId)
+  };
 
 }

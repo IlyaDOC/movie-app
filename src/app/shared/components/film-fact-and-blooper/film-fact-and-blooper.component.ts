@@ -1,13 +1,17 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {OwlOptions} from 'ngx-owl-carousel-o';
 import {FactItemType} from '../../../types/fact-item.type';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-film-fact-and-blooper',
   templateUrl: './film-fact-and-blooper.component.html',
   styleUrl: './film-fact-and-blooper.component.scss'
 })
-export class FilmFactAndBlooperComponent {
+export class FilmFactAndBlooperComponent implements OnInit {
+
+  private router: Router = inject(Router)
+  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   @Input() fact:FactItemType = {
     text: '',
     type: '',
@@ -35,8 +39,16 @@ export class FilmFactAndBlooperComponent {
     },
   }
 
+  public filmId: string = '';
+
   constructor() {
 
+  }
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.filmId = params['filmId'];
+    })
   }
 
 
@@ -45,6 +57,11 @@ export class FilmFactAndBlooperComponent {
     if (fact.spoiler) {
       fact.spoiler = false;
     }
+  }
+
+  getQueryParams(index: number): {[key: string]: number} {
+    const paramName = this.typeOf === 'FACT' ? 'fact' : 'blooper';
+    return {[paramName]: index};
   }
 
 }

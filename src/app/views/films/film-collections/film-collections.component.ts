@@ -1,9 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FilmService} from '../../../shared/services/film.service';
 import {CollectionItemType} from '../../../types/collection-item.type';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {CollectionEnum} from '../../../enums/collection.enum';
-import {catchError, map, Observable, throwError} from 'rxjs';
+import {catchError, map, Observable, Subject, takeUntil, throwError} from 'rxjs';
 import {ErrorResponseType} from '../../../types/error-response.type';
 import {CollectionType} from '../../../types/collection.type';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -13,11 +13,12 @@ import {HttpErrorResponse} from '@angular/common/http';
   templateUrl: './film-collections.component.html',
   styleUrl: './film-collections.component.scss'
 })
-export class FilmCollectionsComponent implements OnInit {
+export class FilmCollectionsComponent implements OnInit, OnDestroy {
   private filmService: FilmService = inject(FilmService);
   public totalPages: number = 0;
   public filmsTop250: {title: string, items: CollectionItemType[]} = {title: '', items: []};
   private _snackBar: MatSnackBar = inject(MatSnackBar);
+  private destroy$: Subject<void> = new Subject();
 
   constructor() {
 
@@ -25,9 +26,15 @@ export class FilmCollectionsComponent implements OnInit {
 
   ngOnInit() {
     this.loadSlicedFilmCollection(CollectionEnum.TOP250MOVIES, 'топ 250 фильмов')
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data)=> {
         this.filmsTop250 = data;
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /** Подписываемся на получение коллекции. Передаем тип коллекции,
@@ -35,6 +42,7 @@ export class FilmCollectionsComponent implements OnInit {
    * Результат функции можно сразу присвоить в переменную */
   loadSlicedFilmCollection(collection: CollectionEnum, title: string): Observable<{title: string, items: CollectionItemType[]}> {
     return this.filmService.getFilmsCollection(collection).pipe(
+      takeUntil(this.destroy$),
       map((data: CollectionType | ErrorResponseType) => {
         if ((data as ErrorResponseType).message) {
           this._snackBar.open((data as ErrorResponseType).message);
@@ -58,4 +66,8 @@ export class FilmCollectionsComponent implements OnInit {
     )
   };
 
+
+  trackById(index: number, item: CollectionItemType): number {
+    return item.kinopoiskId;
+  }
 }

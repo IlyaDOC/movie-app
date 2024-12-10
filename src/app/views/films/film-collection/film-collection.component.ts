@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FilmService} from '../../../shared/services/film.service';
 import {CollectionItemType} from '../../../types/collection-item.type';
 import {ActivatedRoute, Params} from '@angular/router';
@@ -6,16 +6,18 @@ import {CollectionType} from '../../../types/collection.type';
 import {ErrorResponseType} from '../../../types/error-response.type';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpErrorResponse} from '@angular/common/http';
+import {Subject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-film-collection',
   templateUrl: './film-collection.component.html',
   styleUrl: './film-collection.component.scss'
 })
-export class FilmCollectionComponent implements OnInit {
+export class FilmCollectionComponent implements OnInit, OnDestroy {
   private filmService: FilmService = inject(FilmService);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private _snackBar: MatSnackBar = inject(MatSnackBar);
+  private destroy$: Subject<void> = new Subject();
 
   public films: CollectionItemType[] = [];
   public title: string = '';
@@ -25,6 +27,7 @@ export class FilmCollectionComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params
+      .pipe(takeUntil(this.destroy$))
       .subscribe((params: Params) => {
         const collectionNameFromParams = params['collection'];
 
@@ -57,5 +60,10 @@ export class FilmCollectionComponent implements OnInit {
             }
           })
       })
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -8,9 +8,10 @@
   </div>
   <div class="film__facts-items">
     <owl-carousel-o [options]="factCarouselOptions" #OwlCar>
-      <ng-template carouselSlide *ngFor="let item of facts[typeOf]">
+      <ng-template carouselSlide *ngFor="let item of facts[typeOf]; let index = index">
         <div class="fact-item" [class.spoiler]="item.spoiler" (click)="removeSpoilerWrapper(item)">
           <p>{{ item.text | removeHtml }}</p>
+          <a class="show-more" [routerLink]="'/film/' + filmId + '/fact/' + index">Показать полностью</a>
           <div class="fact-item__spoiler">
             <div class="spoiler__content">
               <div class="spoiler__icon">

@@ -28,6 +28,20 @@
     position: relative;
     overflow: hidden;
     min-height: 120px;
+    max-height: 120px;
+    display: grid;
+    gap: 10px;
+
+    p {
+      @include textLimit(4);
+    }
+
+    a.show-more {
+      font-size: 16px;
+      text-decoration: underline;
+      cursor: pointer;
+      align-self: flex-end;
+    }
 
     &__spoiler {
       display: none;

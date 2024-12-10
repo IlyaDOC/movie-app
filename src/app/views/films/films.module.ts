@@ -7,13 +7,15 @@ import {FilmPageComponent} from './film-page/film-page.component';
 import {SharedModule} from '../../shared/shared.module';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import { FilmCollectionComponent } from './film-collection/film-collection.component';
+import { FactDetailsComponent } from './fact-details/fact-details.component';
 
 
 @NgModule({
   declarations: [
     FilmCollectionsComponent,
     FilmPageComponent,
-    FilmCollectionComponent
+    FilmCollectionComponent,
+    FactDetailsComponent
   ],
     imports: [
         CommonModule,

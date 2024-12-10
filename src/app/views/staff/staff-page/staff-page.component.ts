@@ -1,21 +1,23 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {StaffService} from '../../../shared/services/staff.service';
 import {ActivatedRoute} from '@angular/router';
 import {StaffType} from '../../../types/staff.type';
 import {ErrorResponseType} from '../../../types/error-response.type';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpErrorResponse} from '@angular/common/http';
+import {Subject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-staff-page',
   templateUrl: './staff-page.component.html',
   styleUrl: './staff-page.component.scss'
 })
-export class StaffPageComponent implements OnInit {
+export class StaffPageComponent implements OnInit, OnDestroy {
   private staffService: StaffService = inject(StaffService);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private _snackBar: MatSnackBar = inject(MatSnackBar);
   public staffInfo: StaffType;
+  private destroy$: Subject<void> = new Subject();
   constructor() {
     this.staffInfo = {
       personId: 0,
@@ -63,13 +65,20 @@ export class StaffPageComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams
+      .pipe(takeUntil(this.destroy$))
       .subscribe(params => {
         this.getStaffInfoData(params['id']);
       })
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   getStaffInfoData(staffId: string) {
     this.staffService.getStaffInfo(staffId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data: StaffType | ErrorResponseType)=> {
           this.catchErrorInResponse(data as ErrorResponseType);
