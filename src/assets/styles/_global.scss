@@ -47,6 +47,22 @@ img, svg {
   }
 }
 
+.btn {
+  background-color: $bg-secondary;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: $white;
+  width: fit-content;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background-color: $gray;
+  }
+}
+
 body {
   background-color: $bg;
 }

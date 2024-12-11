@@ -7,23 +7,35 @@
       <div class="film__content">
         <div class="film__content-main">
           <div class="film__title">
-            <div class="film__name">
+            <div class="film__name info-block">
               <span>{{ filmData.nameRu }}</span>
               <span>{{ filmData.nameOriginal }}</span>
             </div>
-            <div class="film__year">Год: {{ filmData.year }}</div>
+            <div class="film__slogan info-block">Слоган: <span>"{{ filmData.slogan }}"</span></div>
+            <div class="film__duration info-block">Длительность: {{ filmData.filmLength | filmDuration }}</div>
+            <div class="film__year info-block">Год: {{ filmData.year }}</div>
             <div class="film__genres">
               <div class="genre" *ngFor="let genre of filmData.genres">{{ genre.genre }}</div>
             </div>
           </div>
-          <div class="film__description">
+          <div class="film__ratings info-block">
+            <p>Рейтинг Кинопоиска: {{ filmData.ratingKinopoisk }}</p>
+            <p>Рейтинг IMDB: {{ filmData.ratingImdb }}</p>
+          </div>
+          <div class="film__description info-block">
             {{ filmData.description }}
           </div>
-          <div class="film__directors staff-block">
-            <span>Режиссеры:</span>
-            <owl-carousel-o [options]="staffCarouselOptions">
+          <div class="film__directors staff-block info-block">
+            <div class="staff-block__title">
+              <span>Режиссеры:</span>
+              <div class="carousel-arrows" *ngIf="(groupedStaff['DIRECTOR'] ?? []).length > 2">
+                <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCarDirectors.prev()"></i>
+                <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCarDirectors.next()"></i>
+              </div>
+            </div>
+            <owl-carousel-o [options]="staffCarouselOptions" #OwlCarDirectors>
               <ng-template carouselSlide *ngFor="let director of groupedStaff['DIRECTOR']">
-                <a class="staff-item__container" routerLink="/staff" [queryParams]="{id: director.staffId.toString()}">
+                <a class="staff-item__container" [routerLink]="'/staff/' + director.staffId">
                   <div class="staff-item__image">
                     <img src="{{director.posterUrl}}" alt="Director's photo">
                   </div>
@@ -32,11 +44,17 @@
               </ng-template>
             </owl-carousel-o>
           </div>
-          <div class="film__writers staff-block">
-            <span>Сценаристы:</span>
-            <owl-carousel-o [options]="staffCarouselOptions">
+          <div class="film__writers staff-block info-block">
+            <div class="staff-block__title">
+              <span>Сценаристы:</span>
+              <div class="carousel-arrows" *ngIf="(groupedStaff['WRITER'] ?? []).length > 2">
+                <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCarWriters.prev()"></i>
+                <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCarWriters.next()"></i>
+              </div>
+            </div>
+            <owl-carousel-o [options]="staffCarouselOptions" #OwlCarWriters>
               <ng-template carouselSlide *ngFor="let writer of groupedStaff['WRITER']">
-                <a class="staff-item__container" routerLink="/staff" [queryParams]="{id: writer.staffId.toString()}">
+                <a class="staff-item__container" [routerLink]="'/staff/' + writer.staffId">
                   <div class="staff-item__image">
                     <img src="{{writer.posterUrl}}" alt="Writer's photo">
                   </div>
@@ -45,11 +63,17 @@
               </ng-template>
             </owl-carousel-o>
           </div>
-          <div class="film__actors staff-block">
-            <span>Актеры:</span>
-            <owl-carousel-o [options]="staffCarouselOptions">
+          <div class="film__actors staff-block info-block">
+            <div class="staff-block__title">
+              <span>Актеры:</span>
+              <div class="carousel-arrows" *ngIf="(groupedStaff['ACTOR'] ?? []).length > 2">
+                <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCarActors.prev()"></i>
+                <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCarActors.next()"></i>
+              </div>
+            </div>
+            <owl-carousel-o [options]="staffCarouselOptions" #OwlCarActors>
               <ng-template carouselSlide *ngFor="let actor of groupedStaff['ACTOR']">
-                <a class="staff-item__container" routerLink="/staff" [queryParams]="{id: actor.staffId.toString()}">
+                <a class="staff-item__container" [routerLink]="'/staff/' + actor.staffId">
                   <div class="staff-item__image">
                     <img src="{{actor.posterUrl}}" alt="Actor's photo">
                   </div>
@@ -63,7 +87,7 @@
       </div>
     </div>
     <div class="film--content__additional">
-      <div class="film-budget">
+      <div class="film-budget info-block">
         <div class="film-budget__container">
           <div class="film-budget__title">Бюджет:</div>
           <div
@@ -93,8 +117,10 @@
           <div class="film-budget__details">${{ boxOfficeTotal | number:'1.0-0' }}</div>
         </div>
       </div>
-      <app-film-fact-and-blooper [facts]="groupedFactsAndBloopersData" [title]="factTitle" [typeOf]="factsType"></app-film-fact-and-blooper>
-      <app-film-fact-and-blooper [facts]="groupedFactsAndBloopersData" [title]="bloopersTitle" [typeOf]="bloopersType"></app-film-fact-and-blooper>
+      <app-film-fact-and-blooper [facts]="groupedFactsAndBloopersData" [title]="factTitle"
+                                 [typeOf]="factsType"></app-film-fact-and-blooper>
+      <app-film-fact-and-blooper [facts]="groupedFactsAndBloopersData" [title]="bloopersTitle"
+                                 [typeOf]="bloopersType"></app-film-fact-and-blooper>
     </div>
   </div>
 </div>

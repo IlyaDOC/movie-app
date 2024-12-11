@@ -1,15 +1,14 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {catchError, map, Observable, throwError} from 'rxjs';
+import {inject, Injectable, signal, WritableSignal} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {CollectionType} from '../../types/collection.type';
 import {config} from '../../utils/config';
 import {ErrorResponseType} from '../../types/error-response.type';
 import {FilmType} from '../../types/film.type';
 import {BoxOfficeType} from '../../types/box-office.type';
 import {FactsType} from '../../types/facts.type';
-import {CollectionEnum} from '../../enums/collection.enum';
-import {CollectionItemType} from '../../types/collection-item.type';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {FactItemType} from '../../types/fact-item.type';
 
 @Injectable({
   providedIn: 'root'

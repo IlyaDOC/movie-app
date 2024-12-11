@@ -63,27 +63,10 @@ export class FilmPageComponent implements OnInit, OnDestroy {
         items: 4,
       },
 
-      800: {
-        items: 6,
+      700: {
+        items: 5,
       }
 
-    },
-  }
-
-  factCarouselOptions: OwlOptions = {
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    margin: 20,
-    responsive: {
-      0: {
-        items: 1
-      },
-      500: {
-        items: 4,
-      }
     },
   }
 
@@ -226,16 +209,19 @@ export class FilmPageComponent implements OnInit, OnDestroy {
   /** Группируем массив с сотрудниками полученный
    * через staffService.getStaff по профессиям по ключу */
   groupByProfession() {
-    this.groupedStaff = this.staffData.reduce((acc, staff) => {
-      if (!acc[staff.professionKey]) {
-        acc[staff.professionKey] = [];
-      }
-      if (staff.nameRu) {
-        acc[staff.professionKey].push(staff);
-      }
+    if (this.groupedStaff) {
+      this.groupedStaff = this.staffData.reduce((acc, staff) => {
+        if (!acc[staff.professionKey]) {
+          acc[staff.professionKey] = [];
+        }
+        if (staff.nameRu) {
+          acc[staff.professionKey].push(staff);
+        }
 
-      return acc;
-    }, {} as { [key: string]: FilmStaffType[] });
+        return acc;
+      }, {} as { [key: string]: FilmStaffType[] });
+    }
+
   };
 
 
@@ -304,6 +290,7 @@ export class FilmPageComponent implements OnInit, OnDestroy {
           this.catchErrorInResponse(data as ErrorResponseType);
 
           this.factsAndBloopersData = data as FactsType;
+
           this.groupByFactType();
         },
         error: (errorResponse: HttpErrorResponse) => {
@@ -319,13 +306,14 @@ export class FilmPageComponent implements OnInit, OnDestroy {
   /** Группирует факты и ляпы по двум категориям для последующего удобного отображения
    * в соответствующих блоках */
   groupByFactType() {
-    this.groupedFactsAndBloopersData = this.factsAndBloopersData.items.reduce((acc, fact) => {
-      if (!acc[fact.type]) {
-        acc[fact.type] = [];
-      }
-      acc[fact.type].push(fact);
-
-      return acc;
-    }, {} as { [key: string]: FactItemType[] });
+    if (this.factsAndBloopersData) {
+      this.groupedFactsAndBloopersData = this.factsAndBloopersData.items.reduce((acc, fact) => {
+        if (!acc[fact.type]) {
+          acc[fact.type] = [];
+        }
+        acc[fact.type].push(fact);
+        return acc;
+      }, {} as { [key: string]: FactItemType[] });
+    }
   };
 }

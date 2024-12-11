@@ -4,6 +4,10 @@
   @include breakpoint(lg) {
     --container: 20px;
   }
+
+  @include breakpoint(xl) {
+    --container: 0;
+  }
 }
 
 

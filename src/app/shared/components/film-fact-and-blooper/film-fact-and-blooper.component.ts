@@ -34,6 +34,12 @@ export class FilmFactAndBlooperComponent implements OnInit {
         items: 1
       },
       500: {
+        items: 2,
+      },
+      1160: {
+        items: 3,
+      },
+      1560: {
         items: 4,
       }
     },
@@ -59,7 +65,7 @@ export class FilmFactAndBlooperComponent implements OnInit {
     }
   }
 
-  getQueryParams(index: number): {[key: string]: number} {
+  getParams(index: number): {[key: string]: number} {
     const paramName = this.typeOf === 'FACT' ? 'fact' : 'blooper';
     return {[paramName]: index};
   }

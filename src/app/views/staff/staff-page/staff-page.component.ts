@@ -64,11 +64,11 @@ export class StaffPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.activatedRoute.queryParams
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(params => {
-        this.getStaffInfoData(params['id']);
-      })
+    // this.activatedRoute.params
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe(params => {
+    //     this.getStaffInfoData(params['staffId']);
+    //   })
   }
 
   ngOnDestroy() {
@@ -83,7 +83,6 @@ export class StaffPageComponent implements OnInit, OnDestroy {
         next: (data: StaffType | ErrorResponseType)=> {
           this.catchErrorInResponse(data as ErrorResponseType);
             this.staffInfo = data as StaffType;
-            console.log(this.staffInfo);
 
         },
         error: (errorResponse: HttpErrorResponse) => {

@@ -18,6 +18,10 @@
 
   &-items {
     max-width: calc(100vw - var(--container) * 2);
+
+    @include breakpoint(xl) {
+      max-width: 1600px;
+    }
   }
 
   .fact-item {
@@ -26,14 +30,14 @@
     padding: 10px;
     height: fit-content;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
     min-height: 120px;
     max-height: 120px;
     display: grid;
     gap: 10px;
 
     p {
-      @include textLimit(4);
+
     }
 
     a.show-more {
