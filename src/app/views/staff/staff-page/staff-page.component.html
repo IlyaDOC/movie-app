@@ -16,14 +16,14 @@
           <div class="staff__birthdate">
             <span>{{staffInfo.birthday | date:'dd MMMM, yyyy':'':'ru-Ru'}} • {{staffInfo.age | ageFormat}}</span>
           </div>
-          <div class="staff__growth">{{staffInfo.growth / 100}} м</div>
+          <div class="staff__growth" *ngIf="staffInfo.growth > 0">{{staffInfo.growth / 100}} м</div>
         </div>
         <div class="staff__more-info" *ngIf="showMore">
           <div class="info-item">
             <div class="info-item__name">Карьера</div>
             <div class="info-item__value">{{staffInfo.profession}}т</div>
           </div>
-          <div class="info-item">
+          <div class="info-item" *ngIf="staffInfo.growth > 0">
             <div class="info-item__name">Рост</div>
             <div class="info-item__value">{{staffInfo.growth / 100}} м</div>
           </div>
@@ -43,7 +43,7 @@
             <div class="info-item__name">Место смерти</div>
             <div class="info-item__value">{{staffInfo.deathplace}}</div>
           </div>
-          <div class="info-item">
+          <div class="info-item" *ngIf="staffInfo.spouses.length > 0">
             <div class="info-item__name">{{spouseType}}</div>
             <div class="info-item__value" *ngFor="let spouse of staffInfo.spouses">
               <div class="spouse">
@@ -56,7 +56,7 @@
         </div>
         <button class="btn more-info" (click)="showMoreAction()">{{moreInfoButtonText}}</button>
       </div>
-      <div class="staff__facts">
+      <div class="staff__facts" *ngIf="staffInfo.growth > 0">
         <div class="staff__facts-title">
           <span>Знаете ли вы, что…</span>
           <div class="carousel-arrows">
@@ -88,8 +88,8 @@
             <div class="film-item__name">
               <p>{{ film.nameRu }} ({{film.nameEn}})</p>
             </div>
-            <div class="film-item__rating">Рейтинг: {{film.rating}}</div>
-            <div class="film-item__role">Роль: {{film.description}}</div>
+            <div class="film-item__rating" *ngIf="film.rating">Рейтинг: {{film.rating}}</div>
+            <div class="film-item__role" *ngIf="film.description">Роль: {{film.description}}</div>
             <a [routerLink]="'/film/' + film.filmId">Подробнее</a>
           </div>
         </div>
