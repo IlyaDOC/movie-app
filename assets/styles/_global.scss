@@ -47,8 +47,58 @@ img, svg {
   }
 }
 
+.btn {
+  background-color: $bg-secondary;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: $white;
+  width: fit-content;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background-color: $gray;
+  }
+}
+
 body {
   background-color: $bg;
 }
 
+.info-block {
+  background-color: $bg-secondary;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 16px;
+}
+
+.carousel-arrows {
+  i {
+    cursor: pointer;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: transparent;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $bg;
+  border-radius: 10px;
+  width: 10px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $bg transparent;
+}
 
