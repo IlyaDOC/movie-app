@@ -3,6 +3,8 @@
 
 .staff {
   padding-top: var(--container);
+  max-width: 744px;
+  margin: 0 auto;
 
   @include breakpoint(xl) {
     padding-top: 20px;
@@ -14,6 +16,8 @@
 
   &__main {
     display: grid;
+
+
     &-image {
       display: flex;
       justify-content: center;
@@ -22,20 +26,32 @@
       img {
         max-width: 70%;
         border-radius: 5px;
+
+        @include breakpoint(md) {
+          max-width: 350px;
+        }
       }
     }
 
     &-info {
       text-align: center;
-      display: grid;
+      @include flexColumn;
       gap: 10px;
       margin-bottom: 20px;
+
+
+
       .staff__name {
         display: grid;
         gap: 20px;
+
         p {
           &:first-child {
             font-size: 20px;
+
+            @include breakpoint(md) {
+              font-size: 30px;
+            }
           }
 
           &:last-child {
@@ -80,6 +96,7 @@
       .spouse {
         display: grid;
         gap: 5px;
+
         &__name {
 
         }
@@ -99,11 +116,62 @@
 }
 
 .more-info {
-
   justify-self: center;
+}
+
+.staff__facts {
+  &-title {
+    @include flexCenterBetween;
+    margin: 16px 0 20px;
+
+    span {
+      font-size: 20px;
+    }
+
+    .carousel-arrows {
+      @include flexAlignCenter;
+      gap: 30px;
+    }
+  }
+
+  &-items {
+    .staff__facts-item {
+      overflow-y: auto;
+      min-height: 120px;
+      max-height: 120px;
+    }
+  }
+}
+
+.staff__films {
+  &-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  &-filter {
+    @include flexAlignCenter;
+    gap: 15px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-bottom: 16px;
 
 
-  &:hover {
+  }
+  &-items {
+    @include flexColumn;
+    gap: 10px;
+    .film-item {
+      @include flexColumn;
+      gap: 10px;
+      background-color: $bg-secondary;
+      border-radius: 5px;
+      padding: 10px;
 
+      a {
+        margin-top: 15px;
+        text-decoration: underline;
+      }
+    }
   }
 }

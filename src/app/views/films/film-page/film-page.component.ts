@@ -48,7 +48,7 @@ export class FilmPageComponent implements OnInit, OnDestroy {
   /////////
 
   ////////Owl Carousel
-  staffCarouselOptions: OwlOptions = {
+  public staffCarouselOptions: OwlOptions = {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
@@ -265,8 +265,8 @@ export class FilmPageComponent implements OnInit, OnDestroy {
             this.boxOfficeDataWorld = this.boxOfficeData.items.find((item: BoxOfficeItemType): boolean => item.type === 'WORLD');
 
             // Сумма общих сборов
-            if (this.boxOfficeDataRus?.amount && this.boxOfficeDataUSA?.amount && this.boxOfficeDataWorld?.amount) {
-              this.boxOfficeTotal = this.boxOfficeDataRus.amount + this.boxOfficeDataUSA.amount + this.boxOfficeDataWorld.amount;
+            if (this.boxOfficeDataUSA?.amount && this.boxOfficeDataWorld?.amount) {
+              this.boxOfficeTotal = (this.boxOfficeDataRus?.amount ?? 0) + this.boxOfficeDataUSA.amount + this.boxOfficeDataWorld.amount;
             }
           }
         },

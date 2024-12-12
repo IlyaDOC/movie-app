@@ -94,10 +94,10 @@
             class="film-budget__details">{{ boxOfficeDataBudget?.symbol }}{{ boxOfficeDataBudget?.amount | number:'1.0-0' }}
           </div>
         </div>
-        <div class="film-budget__container">
+        <div class="film-budget__container" *ngIf="boxOfficeDataRus">
           <div class="film-budget__title">Сборы в России:</div>
           <div
-            class="film-budget__details">{{ boxOfficeDataRus?.symbol }}{{ boxOfficeDataRus?.amount | number:'1.0-0' }}
+            class="film-budget__details">{{ boxOfficeDataRus.symbol }}{{ boxOfficeDataRus.amount | number:'1.0-0' }}
           </div>
         </div>
         <div class="film-budget__container">
@@ -118,9 +118,11 @@
         </div>
       </div>
       <app-film-fact-and-blooper [facts]="groupedFactsAndBloopersData" [title]="factTitle"
-                                 [typeOf]="factsType"></app-film-fact-and-blooper>
+                                 [typeOf]="factsType"
+                                 *ngIf="groupedFactsAndBloopersData[factsType]"></app-film-fact-and-blooper>
       <app-film-fact-and-blooper [facts]="groupedFactsAndBloopersData" [title]="bloopersTitle"
-                                 [typeOf]="bloopersType"></app-film-fact-and-blooper>
+                                 [typeOf]="bloopersType"
+                                 *ngIf="groupedFactsAndBloopersData[bloopersType]"></app-film-fact-and-blooper>
     </div>
   </div>
 </div>

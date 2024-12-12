@@ -3,50 +3,96 @@
     <div class="staff__inner">
       <div class="staff__main">
         <div class="staff__main-image">
-          <img src="assets/static/images/staff.webp" alt="Staff photo">
+          <img src="{{staffInfo.posterUrl}}" alt="Staff photo">
         </div>
         <div class="staff__main-info">
           <div class="staff__name">
-            <p>Мэттью Макконахи</p>
-            <p>Matthew McConaughey</p>
+            <p>{{staffInfo.nameRu}}</p>
+            <p>{{staffInfo.nameEn}}</p>
           </div>
           <div class="staff__profession">
-            Актер, Продюсер, Режиссер, Сценарист
+            {{staffInfo.profession}}
           </div>
           <div class="staff__birthdate">
-            <span>1969-11-04 • 55 лет</span>
+            <span>{{staffInfo.birthday | date:'dd MMMM, yyyy':'':'ru-Ru'}} • {{staffInfo.age | ageFormat}}</span>
           </div>
-          <div class="staff__growth">1.82 м</div>
+          <div class="staff__growth">{{staffInfo.growth / 100}} м</div>
         </div>
-<!--        <div class="staff__more-info">-->
-<!--          <div class="info-item">-->
-<!--            <div class="info-item__name">Карьера</div>-->
-<!--            <div class="info-item__value">Актер, Продюсер, Режиссер, Сценарист</div>-->
-<!--          </div>-->
-<!--          <div class="info-item">-->
-<!--            <div class="info-item__name">Рост</div>-->
-<!--            <div class="info-item__value">1.82 м</div>-->
-<!--          </div>-->
-<!--          <div class="info-item">-->
-<!--            <div class="info-item__name">Дата рождения</div>-->
-<!--            <div class="info-item__value">1969-11-04 • <span>55 лет</span></div>-->
-<!--          </div>-->
-<!--          <div class="info-item">-->
-<!--            <div class="info-item__name">Место рождения</div>-->
-<!--            <div class="info-item__value">Увалд, Техас, США</div>-->
-<!--          </div>-->
-<!--          <div class="info-item">-->
-<!--            <div class="info-item__name">Супруга</div>-->
-<!--            <div class="info-item__value">-->
-<!--              <div class="spouse">-->
-<!--                <div class="spouse__name">Камила Алвес</div>-->
-<!--                <div class="spouse__children">трое детей</div>-->
-<!--                <div class="spouse__divorced">В разводе</div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-        <button class="btn more-info">Все детали о персоне</button>
+        <div class="staff__more-info" *ngIf="showMore">
+          <div class="info-item">
+            <div class="info-item__name">Карьера</div>
+            <div class="info-item__value">{{staffInfo.profession}}т</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item__name">Рост</div>
+            <div class="info-item__value">{{staffInfo.growth / 100}} м</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item__name">Дата рождения</div>
+            <div class="info-item__value">{{staffInfo.birthday | date:'dd MMMM, yyyy':'':'ru-Ru'}} • <span>{{staffInfo.age | ageFormat}}</span></div>
+          </div>
+          <div class="info-item">
+            <div class="info-item__name">Место рождения</div>
+            <div class="info-item__value">{{staffInfo.birthplace}}</div>
+          </div>
+          <div class="info-item" *ngIf="staffInfo.death">
+            <div class="info-item__name">Дата смерти</div>
+            <div class="info-item__value">{{staffInfo.death | date:'dd MMMM, yyyy':'':'ru-Ru'}}</div>
+          </div>
+          <div class="info-item" *ngIf="staffInfo.deathplace">
+            <div class="info-item__name">Место смерти</div>
+            <div class="info-item__value">{{staffInfo.deathplace}}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item__name">{{spouseType}}</div>
+            <div class="info-item__value" *ngFor="let spouse of staffInfo.spouses">
+              <div class="spouse">
+                <div class="spouse__name">{{spouse.name}}</div>
+                <div class="spouse__children">Детей: {{spouse.children}}</div>
+                <div class="spouse__divorced" *ngIf="spouse.divorced">В разводе</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn more-info" (click)="showMoreAction()">{{moreInfoButtonText}}</button>
+      </div>
+      <div class="staff__facts">
+        <div class="staff__facts-title">
+          <span>Знаете ли вы, что…</span>
+          <div class="carousel-arrows">
+            <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCarStaffFacts.prev()"></i>
+            <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCarStaffFacts.next()"></i>
+          </div>
+        </div>
+        <div class="staff__facts-items">
+          <owl-carousel-o [options]="staffFactsCarouselOptions" #OwlCarStaffFacts>
+            <ng-template carouselSlide *ngFor="let fact of staffInfo.facts">
+              <div class="staff__facts-item info-block">{{fact}}</div>
+            </ng-template>
+          </owl-carousel-o>
+        </div>
+      </div>
+      <div class="staff__films">
+        <div class="staff__films-title">Фильмография</div>
+        <div class="staff__films-filter">
+          <app-staff-film-filter
+            *ngFor="let profession of staffProfessions"
+            [profession]="profession"
+            [filmCount]="groupedFilms[profession].length"
+            [isActive]="profession === activeFilter()"
+            (filterSelected)="setActiveFilter($event)"
+          ></app-staff-film-filter>
+        </div>
+        <div class="staff__films-items">
+          <div class="film-item" *ngFor="let film of groupedFilms[activeFilter()]">
+            <div class="film-item__name">
+              <p>{{ film.nameRu }} ({{film.nameEn}})</p>
+            </div>
+            <div class="film-item__rating">Рейтинг: {{film.rating}}</div>
+            <div class="film-item__role">Роль: {{film.description}}</div>
+            <a [routerLink]="'/film/' + film.filmId">Подробнее</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

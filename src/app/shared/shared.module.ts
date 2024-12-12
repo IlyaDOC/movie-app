@@ -7,9 +7,8 @@ import { RemoveHtmlPipe } from './pipes/remove-html.pipe';
 import { FilmFactAndBlooperComponent } from './components/film-fact-and-blooper/film-fact-and-blooper.component';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import { FilmDurationPipe } from './pipes/film-duration.pipe';
-
-
-
+import { AgeFormatPipe } from './pipes/age-format.pipe';
+import { StaffFilmFilterComponent } from './components/staff-film-filter/staff-film-filter.component';
 
 
 @NgModule({
@@ -19,6 +18,8 @@ import { FilmDurationPipe } from './pipes/film-duration.pipe';
     RemoveHtmlPipe,
     FilmFactAndBlooperComponent,
     FilmDurationPipe,
+    AgeFormatPipe,
+    StaffFilmFilterComponent,
   ],
   exports: [
     FilmCardComponent,
@@ -26,6 +27,8 @@ import { FilmDurationPipe } from './pipes/film-duration.pipe';
     RemoveHtmlPipe,
     FilmFactAndBlooperComponent,
     FilmDurationPipe,
+    AgeFormatPipe,
+    StaffFilmFilterComponent,
   ],
   imports: [
     CommonModule,

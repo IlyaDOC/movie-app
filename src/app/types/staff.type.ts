@@ -5,7 +5,7 @@ export type StaffType = {
   nameEn: string,
   sex: string,
   posterUrl: string,
-  growth: string,
+  growth: number,
   birthday: string,
   death: string,
   age: number,

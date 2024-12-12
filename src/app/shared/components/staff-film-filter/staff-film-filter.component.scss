@@ -1,0 +1,27 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+
+.filter__item {
+  white-space: nowrap;
+
+  &.active {
+    background-color: $gray;
+    color: $bg;
+
+    span {
+      background-color: $bg;
+      color: $white;
+    }
+  }
+
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    color: $bg;
+    padding: 5px;
+    background: $white;
+    border-radius: 3px;
+    margin-left: 5px;
+  }
+}

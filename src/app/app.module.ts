@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule, provideClientHydration} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -19,6 +19,8 @@ import {CarouselModule} from 'ngx-owl-carousel-o';
 import {FilmsModule} from './views/films/films.module';
 import {HeaderComponent} from './shared/layout/header/header.component';
 import {StaffModule} from './views/staff/staff.module';
+import {registerLocaleData} from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
 
 @NgModule({
   declarations: [
@@ -50,11 +52,15 @@ import {StaffModule} from './views/staff/staff.module';
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {duration: 2500}
-    }
+    },
+    {provide: LOCALE_ID, useValue: 'ru-RU'}
   ],
   exports: [
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor() {
+    registerLocaleData(localeRu);
+  }
 }
