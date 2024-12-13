@@ -1,6 +1,22 @@
 <div class="main">
   <div class="container">
     <div class="main__inner">
+      <div class="main__premiers">
+        <div class="main__premiers-title">
+          <span>Премьеры этого месяца</span>
+          <div class="carousel-arrows">
+            <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCar.prev()"></i>
+            <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCar.next()"></i>
+          </div>
+        </div>
+        <div class="main__premiers-items">
+          <owl-carousel-o [options]="premieresCarouselOptions" #OwlCar  >
+            <ng-template carouselSlide *ngFor="let premiere of premieres">
+              <app-film-card [film]="premiere"></app-film-card>
+            </ng-template>
+          </owl-carousel-o>
+        </div>
+      </div>
       <div class="main__posts">
         <div class="main__posts-title">Новости кинопоиска</div>
         <div class="main__posts-items">

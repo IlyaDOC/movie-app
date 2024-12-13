@@ -8,6 +8,10 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {MediaPostsType} from '../../types/media-posts.type';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActiveParamsUtil} from '../../utils/active-params.util';
+import {OwlOptions} from 'ngx-owl-carousel-o';
+import {FilmService} from '../../shared/services/film.service';
+import {CollectionType} from '../../types/collection.type';
+import {CollectionItemType} from '../../types/collection-item.type';
 
 @Component({
   selector: 'app-main',
@@ -19,6 +23,7 @@ export class MainComponent implements OnInit, OnDestroy {
   private _snackBar: MatSnackBar = inject(MatSnackBar);
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
+  private filmService: FilmService = inject(FilmService);
 
   private destroy$: Subject<void> = new Subject<void>();
   private activeParams: ActiveParamsType = {categories: []};
@@ -37,6 +42,30 @@ export class MainComponent implements OnInit, OnDestroy {
     ]
   };
   private totalPages: number = 0;
+  public premieres: CollectionItemType[] = [];
+
+  ////////Owl Carousel
+  public premieresCarouselOptions: OwlOptions = {
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    navSpeed: 700,
+    margin: 20,
+    responsive: {
+      0: {
+        items: 1
+      },
+      500: {
+        items: 4,
+      },
+
+      700: {
+        items: 5,
+      }
+
+    },
+  }
 
   constructor() {
   }
@@ -44,6 +73,7 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.setFirstPage();
     this.getNewsData();
+    this.getPremieresData();
   }
 
   ngOnDestroy() {
@@ -51,15 +81,24 @@ export class MainComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  /** Подписываемся на получение новостей с кинопоиска */
   getNewsData() {
     this.postsService.getMediaPosts()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data: MediaPostsType | ErrorResponseType) => {
           this.catchErrorInResponse(data as ErrorResponseType);
+
+          // Получаем из запроса общее количество страниц
           this.totalPages = (data as MediaPostsType).totalPages;
+
           if (this.totalPages && this.activeParams.page) {
+            // Далаем запрос с последней страницы (в query параметрах она будет первой,
+            // т.к. с сервера первыми выдает самые старые новости.
+            // При итерировании компонента новостей, массив тоже переворачивается в шаблоне
             const actualPage: number = this.totalPages - this.activeParams.page + 1;
+
+            // Получаем уже данные по новостям
             this.postsService.getMediaPosts(actualPage)
               .subscribe((data: MediaPostsType | ErrorResponseType) => {
                 this.posts = data as MediaPostsType;
@@ -89,6 +128,9 @@ export class MainComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  /** Устанавливаем в query параметры страницы 1 страницу
+   * для показа 1 страницы списка новостей */
   setFirstPage() {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (!params['page']) {
@@ -98,8 +140,32 @@ export class MainComponent implements OnInit, OnDestroy {
           queryParamsHandling: 'merge'
         });
       }
-
+      // Устанавливаем значение из query параметров для запросов
       this.activeParams = ActiveParamsUtil.processParams(params);
     })
+  };
+
+  getPremieresData(): void {
+    const date = new Date();
+    const actualYear = new Date().getFullYear();
+    const actualMonth = date.toLocaleString('en-US', {month: 'long'}).toUpperCase();
+    this.filmService.getPremieres(actualYear, actualMonth)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+          next: (data: CollectionType | ErrorResponseType) => {
+            this.catchErrorInResponse(data as ErrorResponseType);
+
+            this.premieres = (data as CollectionType).items;
+
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            if (errorResponse.error && errorResponse.error.message) {
+              this._snackBar.open(errorResponse.error.message);
+            } else {
+              this._snackBar.open('Ошибка получения данных');
+            }
+          }
+        }
+      )
   }
 }

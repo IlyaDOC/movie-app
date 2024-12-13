@@ -22,4 +22,18 @@
       gap: var(--container);
     }
   }
+
+  &__premiers {
+    &-title {
+      font-size: 20px;
+      margin-bottom: 16px;
+      @include flexCenterBetween;
+      .carousel-arrows {
+        @include flexCenterBetween;
+        gap: 30px;
+      }
+    }
+
+
+  }
 }

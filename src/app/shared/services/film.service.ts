@@ -47,4 +47,13 @@ export class FilmService {
     return this.http.get<FactsType | ErrorResponseType>(config.api + 'v2.2/films/' + filmId +' /facts');
   }
 
+  getPremieres(year: number, month: string): Observable<CollectionType | ErrorResponseType>  {
+    return this.http.get<CollectionType | ErrorResponseType>(config.api + 'v2.2/films/premieres', {
+      params: {
+        year: year,
+        month: month,
+      }
+    })
+  }
+
 }
