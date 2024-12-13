@@ -9,6 +9,7 @@ import {CarouselModule} from 'ngx-owl-carousel-o';
 import { FilmDurationPipe } from './pipes/film-duration.pipe';
 import { AgeFormatPipe } from './pipes/age-format.pipe';
 import { StaffFilmFilterComponent } from './components/staff-film-filter/staff-film-filter.component';
+import {PostComponent} from './components/post/post.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { StaffFilmFilterComponent } from './components/staff-film-filter/staff-f
     FilmDurationPipe,
     AgeFormatPipe,
     StaffFilmFilterComponent,
+    PostComponent,
   ],
   exports: [
     FilmCardComponent,
@@ -29,6 +31,7 @@ import { StaffFilmFilterComponent } from './components/staff-film-filter/staff-f
     FilmDurationPipe,
     AgeFormatPipe,
     StaffFilmFilterComponent,
+    PostComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,25 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
+
+.main {
+  padding-top: var(--container);
+
+  @include breakpoint(xl) {
+    padding-top: 20px;
+  }
+  &__inner {
+
+  }
+
+  &__posts {
+    &-title {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    &-items {
+      display: grid;
+      gap: var(--container);
+    }
+  }
+}

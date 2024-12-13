@@ -1,0 +1,13 @@
+<div class="post">
+  <div class="post__date">{{post.publishedAt | date:'dd MMMM, yyyy':'':'ru-Ru'}}</div>
+  <div class="post__content">
+    <div class="post__content-image">
+      <img src="{{post.imageUrl}}" alt="Post image" loading="lazy">
+    </div>
+    <div class="post__content-text">
+      <div class="post__title">{{post.title}}</div>
+      <div class="post__description">{{post.description}}</div>
+      <a class="post__url" href="{{post.url}}">Прочитать статью на Кинопоиск.ru</a>
+    </div>
+  </div>
+</div>
