@@ -11,16 +11,20 @@
         </div>
         <div class="main__premiers-items">
           <owl-carousel-o [options]="premieresCarouselOptions" #OwlCar  >
-            <ng-template carouselSlide *ngFor="let premiere of premieres">
-              <app-film-card [film]="premiere"></app-film-card>
-            </ng-template>
+            @for (premiere of premieres; track premiere.kinopoiskId) {
+              <ng-template carouselSlide>
+                <app-film-card [film]="premiere"></app-film-card>
+              </ng-template>
+            }
           </owl-carousel-o>
         </div>
       </div>
       <div class="main__posts">
         <div class="main__posts-title">Новости кинопоиска</div>
         <div class="main__posts-items">
-          <app-post *ngFor="let post of posts.items.reverse()" [post]="post"></app-post>
+          @for (post of posts; track post.kinopoiskId) {
+            <app-post [post]="post"></app-post>
+          }
         </div>
       </div>
     </div>
