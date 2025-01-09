@@ -82,7 +82,7 @@ body {
 
 ::-webkit-scrollbar {
   width: 1px;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -100,5 +100,11 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: $bg transparent;
+}
+
+.custom-carousel, .film__facts, .staff {
+  .p-carousel-item {
+    padding-right: 10px;
+  }
 }
 
