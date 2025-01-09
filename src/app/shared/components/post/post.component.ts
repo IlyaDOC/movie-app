@@ -7,16 +7,15 @@ import {MediaPostType} from '../../../types/media-post.type';
   styleUrl: './post.component.scss'
 })
 export class PostComponent implements OnInit {
-  @Input() post: MediaPostType;
+  @Input() post: MediaPostType = {
+    kinopoiskId: 0,
+    imageUrl: '',
+    title: '',
+    description: '',
+    url: '',
+    publishedAt: ''
+  };
   constructor() {
-    this.post = {
-      kinopoiskId: 0,
-      imageUrl: '',
-      title: '',
-      description: '',
-      url: '',
-      publishedAt: ''
-    }
   }
 
   ngOnInit() {

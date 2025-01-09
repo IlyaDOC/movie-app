@@ -12,6 +12,7 @@ import {OwlOptions} from 'ngx-owl-carousel-o';
 import {FilmService} from '../../shared/services/film.service';
 import {CollectionType} from '../../types/collection.type';
 import {CollectionItemType} from '../../types/collection-item.type';
+import {MediaPostType} from '../../types/media-post.type';
 
 @Component({
   selector: 'app-main',
@@ -27,20 +28,19 @@ export class MainComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   private activeParams: ActiveParamsType = {categories: []};
-  public posts: MediaPostsType = {
-    total: 0,
-    totalPages: 0,
-    items: [
-      {
-        kinopoiskId: 0,
-        imageUrl: '',
-        title: '',
-        description: '',
-        url: '',
-        publishedAt: ''
-      }
-    ]
-  };
+  public posts: MediaPostType[] = [
+    {
+      kinopoiskId: 0,
+      imageUrl: '',
+      title: '',
+      description: '',
+      url: '',
+      publishedAt: ''
+    }
+  ]
+
+
+  ;
   private totalPages: number = 0;
   public premieres: CollectionItemType[] = [];
   public showRating: boolean = false;
@@ -106,7 +106,8 @@ export class MainComponent implements OnInit, OnDestroy {
             // Получаем уже данные по новостям
             this.postsService.getMediaPosts(actualPage)
               .subscribe((data: MediaPostsType | ErrorResponseType) => {
-                this.posts = data as MediaPostsType;
+                this.posts = (data as MediaPostsType).items.reverse();
+                console.log(this.posts)
               })
           }
         },

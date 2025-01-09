@@ -43,7 +43,6 @@
   &__nav {
     display: grid;
     position: fixed;
-    //top: -100%;
     width: calc(100% - var(--container) * 2);
     left: var(--container);
     background-color: $bg-secondary;
@@ -60,6 +59,10 @@
     &.opened {
       max-height: 1000px;
       visibility: visible;
+    }
+
+    @include breakpoint(md) {
+      top: calc(144px + var(--container));
     }
 
     @include breakpoint(lg) {
@@ -90,11 +93,14 @@
           display: flex;
           align-items: center;
           gap: 15px;
-          height: 86px;
           width: 100%;
           font-weight: 600;
           padding: 15px;
           border-radius: 5px;
+
+          @include breakpoint(md) {
+            height: 86px;
+          }
 
           @include breakpoint(lg) {
             height: fit-content;
