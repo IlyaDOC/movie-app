@@ -107,7 +107,6 @@ export class MainComponent implements OnInit, OnDestroy {
             this.postsService.getMediaPosts(actualPage)
               .subscribe((data: MediaPostsType | ErrorResponseType) => {
                 this.posts = (data as MediaPostsType).items.reverse();
-                console.log(this.posts)
               })
           }
         },
