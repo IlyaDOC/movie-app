@@ -118,13 +118,10 @@
 }
 
 
-
-.staff-block, owl-carousel-o, .owl-stage {
+.staff-block {
   font-weight: 400;
   max-width: calc(100vw - var(--container) * 2);
   overflow: hidden;
-  display: grid;
-  grid-template-rows: minmax(0, 1fr);
   gap: 10px;
 
   @include breakpoint(md) {
@@ -142,10 +139,10 @@
   .staff-block__title {
     @include flexCenterBetween;
 
-    .carousel-arrows {
-      @include flexAlignCenter;
-      gap: 30px;
-    }
+  }
+
+  &__title {
+    margin-bottom: 10px;
   }
 
   span {
@@ -189,6 +186,10 @@
     display: flex;
     gap: 5px;
   }
+}
+
+.film p-carousel {
+  max-width: calc(100% - 40px);
 }
 
 

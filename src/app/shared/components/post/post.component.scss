@@ -6,9 +6,25 @@
   color: black;
   border-radius: 10px;
   padding: 10px;
+  height: 400px;
+
+  &__content {
+    display: grid;
+    grid-auto-rows: auto;
+    gap: 10px;
+
+    &-text {
+      display: grid;
+    }
+  }
 
   &__content-image {
-
+    height: 200px;
+    width: auto;
+    overflow: hidden;
+    img {
+      width: auto;
+    }
   }
 
   &__date {
@@ -19,16 +35,19 @@
 
   &__title {
     margin-bottom: 15px;
+    @include textLimit(2);
   }
 
   &__description {
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 10px;
+    @include textLimit(3);
   }
 
   &__url {
     color: #be6711;
     text-decoration: underline;
+    align-self: flex-end;
   }
 }

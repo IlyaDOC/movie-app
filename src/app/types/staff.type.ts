@@ -14,7 +14,7 @@ export type StaffType = {
   hasAwards: number,
   profession: string,
   facts: [
-    string,
+    string
   ],
   spouses: [
     {

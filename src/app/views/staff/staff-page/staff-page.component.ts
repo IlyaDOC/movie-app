@@ -115,6 +115,7 @@ export class StaffPageComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
   /** Получаем всю информацию об актере по подписке */
   getStaffInfoData(staffId: string) {
     this.staffService.getStaffInfo(staffId)

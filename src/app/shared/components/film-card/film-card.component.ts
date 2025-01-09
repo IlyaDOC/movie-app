@@ -8,6 +8,7 @@ import {CollectionItemType} from '../../../types/collection-item.type';
 })
 export class FilmCardComponent {
   @Input() film: CollectionItemType;
+  @Input() showRating: boolean = true;
 
   constructor() {
     this.film = {

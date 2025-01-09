@@ -43,29 +43,7 @@ export class MainComponent implements OnInit, OnDestroy {
   };
   private totalPages: number = 0;
   public premieres: CollectionItemType[] = [];
-
-  ////////Owl Carousel
-  public premieresCarouselOptions: OwlOptions = {
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    margin: 20,
-    responsive: {
-      0: {
-        items: 1
-      },
-      500: {
-        items: 4,
-      },
-
-      700: {
-        items: 5,
-      }
-
-    },
-  }
+  public showRating: boolean = false;
 
   constructor() {
   }
@@ -80,6 +58,33 @@ export class MainComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  /** Подписываемся на получения премьер данного месяца */
+  getPremieresData(): void {
+    const date = new Date();
+    const actualYear = new Date().getFullYear();
+    const actualMonth = date.toLocaleString('en-US', {month: 'long'}).toUpperCase();
+    this.filmService.getPremieres(actualYear, actualMonth)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+          next: (data: CollectionType | ErrorResponseType) => {
+            this.catchErrorInResponse(data as ErrorResponseType);
+
+            this.premieres = (data as CollectionType).items;
+
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            if (errorResponse.error && errorResponse.error.message) {
+              this._snackBar.open(errorResponse.error.message);
+            } else {
+              this._snackBar.open('Ошибка получения данных');
+            }
+          }
+        }
+      )
+  }
+
+
 
   /** Подписываемся на получение новостей с кинопоиска */
   getNewsData() {
@@ -145,27 +150,5 @@ export class MainComponent implements OnInit, OnDestroy {
     })
   };
 
-  getPremieresData(): void {
-    const date = new Date();
-    const actualYear = new Date().getFullYear();
-    const actualMonth = date.toLocaleString('en-US', {month: 'long'}).toUpperCase();
-    this.filmService.getPremieres(actualYear, actualMonth)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-          next: (data: CollectionType | ErrorResponseType) => {
-            this.catchErrorInResponse(data as ErrorResponseType);
 
-            this.premieres = (data as CollectionType).items;
-
-          },
-          error: (errorResponse: HttpErrorResponse) => {
-            if (errorResponse.error && errorResponse.error.message) {
-              this._snackBar.open(errorResponse.error.message);
-            } else {
-              this._snackBar.open('Ошибка получения данных');
-            }
-          }
-        }
-      )
-  }
 }

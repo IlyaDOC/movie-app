@@ -10,6 +10,7 @@ import { FilmDurationPipe } from './pipes/film-duration.pipe';
 import { AgeFormatPipe } from './pipes/age-format.pipe';
 import { StaffFilmFilterComponent } from './components/staff-film-filter/staff-film-filter.component';
 import {PostComponent} from './components/post/post.component';
+import {Carousel} from "primeng/carousel";
 
 
 @NgModule({
@@ -33,12 +34,13 @@ import {PostComponent} from './components/post/post.component';
     StaffFilmFilterComponent,
     PostComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterLink,
-    RouterOutlet,
-    RouterLinkActive,
-    CarouselModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterLink,
+        RouterOutlet,
+        RouterLinkActive,
+        CarouselModule,
+        Carousel,
+    ]
 })
 export class SharedModule { }

@@ -28,13 +28,13 @@
           <div class="film__directors staff-block info-block">
             <div class="staff-block__title">
               <span>Режиссеры:</span>
-              <div class="carousel-arrows" *ngIf="(groupedStaff['DIRECTOR'] ?? []).length > 2">
-                <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCarDirectors.prev()"></i>
-                <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCarDirectors.next()"></i>
-              </div>
             </div>
-            <owl-carousel-o [options]="staffCarouselOptions" #OwlCarDirectors>
-              <ng-template carouselSlide *ngFor="let director of groupedStaff['DIRECTOR']">
+            <p-carousel [value]="groupedStaff['DIRECTOR']"
+                        [numVisible]="2.2"
+                        [numScroll]="2"
+                        [circular]="false"
+                        [showNavigators]="false">
+              <ng-template let-director #item>
                 <a class="staff-item__container" [routerLink]="'/staff/' + director.staffId">
                   <div class="staff-item__image">
                     <img src="{{director.posterUrl}}" alt="Director's photo">
@@ -42,18 +42,18 @@
                   <div class="staff-item__name">{{ director.nameRu }}</div>
                 </a>
               </ng-template>
-            </owl-carousel-o>
+            </p-carousel>
           </div>
           <div class="film__writers staff-block info-block">
             <div class="staff-block__title">
               <span>Сценаристы:</span>
-              <div class="carousel-arrows" *ngIf="(groupedStaff['WRITER'] ?? []).length > 2">
-                <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCarWriters.prev()"></i>
-                <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCarWriters.next()"></i>
-              </div>
             </div>
-            <owl-carousel-o [options]="staffCarouselOptions" #OwlCarWriters>
-              <ng-template carouselSlide *ngFor="let writer of groupedStaff['WRITER']">
+            <p-carousel [value]="groupedStaff['WRITER']"
+                        [numVisible]="2.2"
+                        [numScroll]="2"
+                        [circular]="false"
+                        [showNavigators]="false">
+              <ng-template let-writer #item>
                 <a class="staff-item__container" [routerLink]="'/staff/' + writer.staffId">
                   <div class="staff-item__image">
                     <img src="{{writer.posterUrl}}" alt="Writer's photo">
@@ -61,18 +61,18 @@
                   <div class="staff-item__name">{{ writer.nameRu }}</div>
                 </a>
               </ng-template>
-            </owl-carousel-o>
+            </p-carousel>
           </div>
           <div class="film__actors staff-block info-block">
             <div class="staff-block__title">
               <span>Актеры:</span>
-              <div class="carousel-arrows" *ngIf="(groupedStaff['ACTOR'] ?? []).length > 2">
-                <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCarActors.prev()"></i>
-                <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCarActors.next()"></i>
-              </div>
             </div>
-            <owl-carousel-o [options]="staffCarouselOptions" #OwlCarActors>
-              <ng-template carouselSlide *ngFor="let actor of groupedStaff['ACTOR']">
+            <p-carousel [value]="groupedStaff['ACTOR']"
+                        [numVisible]="2.2"
+                        [numScroll]="2"
+                        [circular]="false"
+                        [showNavigators]="false">
+              <ng-template let-actor #item>
                 <a class="staff-item__container" [routerLink]="'/staff/' + actor.staffId">
                   <div class="staff-item__image">
                     <img src="{{actor.posterUrl}}" alt="Actor's photo">
@@ -81,7 +81,7 @@
                   <span class="staff-item__role">{{ actor.description }}</span>
                 </a>
               </ng-template>
-            </owl-carousel-o>
+            </p-carousel>
           </div>
         </div>
       </div>

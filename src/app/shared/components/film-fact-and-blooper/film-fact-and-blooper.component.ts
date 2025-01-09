@@ -22,29 +22,6 @@ export class FilmFactAndBlooperComponent implements OnInit {
   @Input() facts: { [key: string]: FactItemType[] } = {};
   @Input() typeOf: string = '';
 
-  public factCarouselOptions: OwlOptions = {
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    navSpeed: 700,
-    margin: 20,
-    responsive: {
-      0: {
-        items: 1
-      },
-      500: {
-        items: 2,
-      },
-      1160: {
-        items: 3,
-      },
-      1560: {
-        items: 4,
-      }
-    },
-  }
-
   public filmId: string = '';
 
   constructor() {
@@ -65,9 +42,5 @@ export class FilmFactAndBlooperComponent implements OnInit {
     }
   }
 
-  getParams(index: number): {[key: string]: number} {
-    const paramName = this.typeOf === 'FACT' ? 'fact' : 'blooper';
-    return {[paramName]: index};
-  }
 
 }

@@ -30,14 +30,14 @@
     padding: 10px;
     height: fit-content;
     position: relative;
-    overflow-y: auto;
     min-height: 120px;
     max-height: 120px;
     display: grid;
     gap: 10px;
 
     p {
-
+      max-height: 100px;
+      overflow-y: auto;
     }
 
     a.show-more {

@@ -21,6 +21,8 @@ import {HeaderComponent} from './shared/layout/header/header.component';
 import {StaffModule} from './views/staff/staff.module';
 import {IMAGE_CONFIG, registerLocaleData} from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import {Button} from "primeng/button";
+import {Carousel} from 'primeng/carousel';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,10 @@ import localeRu from '@angular/common/locales/ru';
     CarouselModule,
     FilmsModule,
     StaffModule,
-    AppRoutingModule
+    Button,
+    Carousel,
+    AppRoutingModule,
+
   ],
   providers: [
     provideClientHydration(),

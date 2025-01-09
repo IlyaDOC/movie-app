@@ -11,18 +11,6 @@
 
   }
 
-  &__posts {
-    &-title {
-      font-size: 20px;
-      margin-bottom: 16px;
-    }
-
-    &-items {
-      display: grid;
-      gap: var(--container);
-    }
-  }
-
   &__premiers {
     &-title {
       font-size: 20px;
@@ -34,6 +22,21 @@
       }
     }
 
+    &-items {
+      margin-bottom: 16px;
+    }
+  }
 
+  &__posts {
+    &-title {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    &-items {
+      display: grid;
+      gap: var(--container);
+    }
   }
 }
+

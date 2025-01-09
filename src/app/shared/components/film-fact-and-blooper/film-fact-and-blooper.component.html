@@ -1,14 +1,14 @@
-<div class="film__facts" >
+<div class="film__facts">
   <div class="film__facts-title">
     {{title}}
-    <div class="carousel-arrows">
-      <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCar.prev()"></i>
-      <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCar.next()"></i>
-    </div>
   </div>
   <div class="film__facts-items">
-    <owl-carousel-o [options]="factCarouselOptions" #OwlCar>
-      <ng-template carouselSlide *ngFor="let item of facts[typeOf]; let index = index">
+    <p-carousel [value]="facts[typeOf]"
+                [numScroll]="1"
+                [numVisible]="1.2"
+                [circular]="false"
+                [showNavigators]="false">
+      <ng-template let-item #item>
         <div class="fact-item" [class.spoiler]="item.spoiler" (click)="removeSpoilerWrapper(item)">
           <p>{{ item.text | removeHtml }}</p>
           <div class="fact-item__spoiler">
@@ -24,6 +24,6 @@
           </div>
         </div>
       </ng-template>
-    </owl-carousel-o>
+    </p-carousel>
   </div>
 </div>

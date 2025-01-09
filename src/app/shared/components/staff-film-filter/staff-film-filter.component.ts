@@ -17,7 +17,8 @@ export class StaffFilmFilterComponent implements OnInit {
     DIRECTOR: 'Режиссер',
     WRITER: 'Сценарист',
     HRONO_TITR_MALE: 'Актер: Хроника, в титрах не указан',
-    HIMSELF: 'Актер, играет самого себя'
+    HIMSELF: 'Актер, играет самого себя',
+    HERSELF: 'Актриса, играет саму себя'
   };
 
 

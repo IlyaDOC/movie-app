@@ -27,11 +27,11 @@
             <div class="info-item__name">Рост</div>
             <div class="info-item__value">{{staffInfo.growth / 100}} м</div>
           </div>
-          <div class="info-item">
+          <div class="info-item" *ngIf="staffInfo.birthday">
             <div class="info-item__name">Дата рождения</div>
             <div class="info-item__value">{{staffInfo.birthday | date:'dd MMMM, yyyy':'':'ru-Ru'}} • <span>{{staffInfo.age | ageFormat}}</span></div>
           </div>
-          <div class="info-item">
+          <div class="info-item" *ngIf="staffInfo.birthplace">
             <div class="info-item__name">Место рождения</div>
             <div class="info-item__value">{{staffInfo.birthplace}}</div>
           </div>
@@ -45,8 +45,8 @@
           </div>
           <div class="info-item" *ngIf="staffInfo.spouses.length > 0">
             <div class="info-item__name">{{spouseType}}</div>
-            <div class="info-item__value" *ngFor="let spouse of staffInfo.spouses">
-              <div class="spouse">
+            <div class="info-item__value">
+              <div class="spouse" *ngFor="let spouse of staffInfo.spouses">
                 <div class="spouse__name">{{spouse.name}}</div>
                 <div class="spouse__children">Детей: {{spouse.children}}</div>
                 <div class="spouse__divorced" *ngIf="spouse.divorced">В разводе</div>
@@ -56,20 +56,22 @@
         </div>
         <button class="btn more-info" (click)="showMoreAction()">{{moreInfoButtonText}}</button>
       </div>
-      <div class="staff__facts" *ngIf="staffInfo.growth > 0">
+      <div class="staff__facts" *ngIf="staffInfo.facts.length > 0">
         <div class="staff__facts-title">
           <span>Знаете ли вы, что…</span>
-          <div class="carousel-arrows">
-            <i class="pi pi-arrow-left" style="font-size: 18px" (click)="OwlCarStaffFacts.prev()"></i>
-            <i class="pi pi-arrow-right" style="font-size: 18px" (click)="OwlCarStaffFacts.next()"></i>
-          </div>
         </div>
         <div class="staff__facts-items">
-          <owl-carousel-o [options]="staffFactsCarouselOptions" #OwlCarStaffFacts>
-            <ng-template carouselSlide *ngFor="let fact of staffInfo.facts">
-              <div class="staff__facts-item info-block">{{fact}}</div>
+          <p-carousel [value]="staffInfo.facts"
+                      [numScroll]="1"
+                      [numVisible]="1.2"
+                      [circular]="false"
+                      [showNavigators]="false">
+            <ng-template let-fact #item>
+              <div class="staff__facts-item info-block">
+                <p>{{fact}}</p>
+              </div>
             </ng-template>
-          </owl-carousel-o>
+          </p-carousel>
         </div>
       </div>
       <div class="staff__films">

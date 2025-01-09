@@ -2,7 +2,7 @@
 @import "../../../../assets/styles/mixins";
 
 .staff {
-  padding-top: var(--container);
+  padding: var(--container) 0;
   max-width: 744px;
   margin: 0 auto;
 
@@ -97,6 +97,10 @@
         display: grid;
         gap: 5px;
 
+        & + .spouse {
+          margin-top: 10px;
+        }
+
         &__name {
 
         }
@@ -120,6 +124,7 @@
 }
 
 .staff__facts {
+  margin-top: 16px;
   &-title {
     @include flexCenterBetween;
     margin: 16px 0 20px;
@@ -136,14 +141,21 @@
 
   &-items {
     .staff__facts-item {
-      overflow-y: auto;
+
       min-height: 120px;
       max-height: 120px;
+      margin-bottom: 0;
+
+      p {
+        overflow-y: auto;
+        max-height: 100px;
+      }
     }
   }
 }
 
 .staff__films {
+  margin-top: 16px;
   &-title {
     font-size: 20px;
     margin-bottom: 16px;
